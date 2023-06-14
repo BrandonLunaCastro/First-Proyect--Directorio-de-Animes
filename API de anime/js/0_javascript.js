@@ -43,6 +43,21 @@ let page = Anime_api.page,
             ApiURL = `${Anime_api.SEARCH}${query}&page[limit]=9&page[offset]=${page}`
 
            getAnimes(page,ApiURL)
+    }else{
+      $main.innerHTML =  ` <h1>Aqui cargara al anime seleccionado</h1>`
+
+        let id = localStorage.getItem("PostId")
+        //console.log(id)
+        ajax({
+            url : `https://kitsu.io/api/edge/anime/${id}`,
+            cbSuccess:(post) => {
+                let html = ""
+                console.log(post.data)
+            
+                
+            }
+        })
+
     }
     $loader.style.display = "none"
 }
@@ -51,9 +66,10 @@ let page = Anime_api.page,
     const paginacion =  () => {
             const $form = document.querySelector(".btns")
             let query = localStorage.getItem("query")
+           let hash = Anime_api.hash; 
            
             $form.addEventListener("click",  e => { 
-                let hash; 
+                
 
                 if(e.target.matches("#next")){
                     document.getElementById("back").removeAttribute("disabled");
@@ -81,15 +97,17 @@ let page = Anime_api.page,
                         document.getElementById("back").setAttribute("disabled","")
                     }
 
-                    if(!location.hash|| location.hash === "#/home" || location.hash === ("#/0")){
+                    if(!location.hash|| location.hash === "#/home" || location.hash.includes("#/page")){
                         ApiURL = `${Anime_api.ANIMES}?page[limit]=9&page[offset]=${page}`;
+                        hash= `#/page=${pagina}`
                     }else if(location.hash.includes("#/search")){
                         ApiURL = `${Anime_api.SEARCH}${query}&page[limit]=9&page[offset]=${page}`;
+                        hash=`#/search?search=${query}/${pagina}`
                     }
 
                     console.log(page)
                     getAnimes(page,ApiURL);
-                    history.pushState(null,"",`#/${pagina}`);
+                    history.pushState(null,"",hash);
                 }
             })
     }
@@ -108,7 +126,7 @@ let page = Anime_api.page,
                 html = "";
                 console.log(data)
                 data.forEach(el => {
-                        html += posts(el.attributes);
+                        html += posts(el.attributes,el.id);
                 });
                 
                 document.querySelector("main").innerHTML = html
@@ -144,6 +162,26 @@ let page = Anime_api.page,
 
     };
 
+/////// <-----Funcion Show Anime--->
+const showAnime = (props) =>{
+        let {} = props
+
+
+            return `
+
+                  <div class="global-container>
+                    <div class="seccion1">
+                        <img></img>
+                        <nav></nav>
+                    </div>
+                  </div>
+            
+            `;
+    
+  
+        }
+
+
 ////Cargas al DOM////
     document.addEventListener("DOMContentLoaded",e => {
             document.querySelector("main").innerHTML = null    
@@ -151,6 +189,7 @@ let page = Anime_api.page,
             peticion();
             paginacion();
             search();
+            
     })
 
    window.addEventListener("hashchange",e => {
