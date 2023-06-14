@@ -3,8 +3,8 @@ import { posts } from "./modulos/Post_home.js"
 import ajax from "./modulos/ajax.js"
 
 let page = Anime_api.page,
-     pagina = Anime_api.number_page
-     ;
+     pagina = Anime_api.number_page,
+     ApiURL;
         
 //////Funciones//////
 
@@ -12,8 +12,7 @@ let page = Anime_api.page,
 
 
     //<---FUNCION PETICION--->
-    const peticion = async () => {
-    let ApiURL; 
+    const peticion = async () => { 
     
     const $main = document.querySelector("main"),
    
@@ -40,22 +39,9 @@ let page = Anime_api.page,
             localStorage.removeItem("query");
             return false;
         }
+            ApiURL = `${Anime_api.SEARCH}${query}&page[limit]=9&page[offset]=${page}`
 
-        //ApiURL = `${Anime_api.ANIMES}?page[limit]=9&page[offset]=${page}?filter[text]=${query}`           //https://kitsu.io/api/edge/anime?page[limit]=1&page[offset]=0?filter[text]=naruto
-          //getAnimes(page)
-         ajax({
-            url: `${Anime_api.SEARCH}${query}`,//?page[limit]=9&page[offset]=0`
-            cbSuccess: (animes) => {
-                let data = animes.data,
-                html = ""
-                console.log(data)
-                data.forEach((el)=> {
-                    html += posts(el.attributes)
-                })
-                document.querySelector("main").innerHTML = html
-            }
-        })  
- 
+           getAnimes(page,ApiURL)
     }
     $loader.style.display = "none"
 }
@@ -90,16 +76,19 @@ let page = Anime_api.page,
 
     /// <---funcion getAnimes ---> 
 
-    const getAnimes = async (page) => {
+    const getAnimes = async (page,URL) => {
+        
+        URL = URL || `${Anime_api.ANIMES}?page[limit]=9&page[offset]=${page}`
+         
         await  ajax({
-            url:`${Anime_api.ANIMES}?page[limit]=9&page[offset]=${page}`,
+            url: URL,
             cbSuccess:(animes) => {
                 console.log(URL)
                 let data = animes.data,
                 html = "";
                 console.log(data)
                 data.forEach(el => {
-                        html += posts(el.attributes)
+                        html += posts(el.attributes);
                 });
                 
                 document.querySelector("main").innerHTML = html
