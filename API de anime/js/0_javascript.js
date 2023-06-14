@@ -32,7 +32,8 @@ let page = Anime_api.page,
 
     }else if(hash.includes("#/search")){
         console.log("seccion buscador") 
-       
+        page=0;
+        pagina=0;
         let query = localStorage.getItem("query")
 
         if(!query){
@@ -49,16 +50,27 @@ let page = Anime_api.page,
     //<---FUNCION DE PAGINACION--->
     const paginacion =  () => {
             const $form = document.querySelector(".btns")
-
+            let query = localStorage.getItem("query")
+           
             $form.addEventListener("click",  e => { 
-            
+                let hash; 
+
                 if(e.target.matches("#next")){
-            
                     document.getElementById("back").removeAttribute("disabled");
                     page+=9;
                     pagina++;
-                    getAnimes(page); 
-                    history.pushState(null,"",`#/${pagina}`)
+                    
+                    if(!location.hash|| location.hash === "#/home" || location.hash.includes("#/page")){
+                        ApiURL = `${Anime_api.ANIMES}?page[limit]=9&page[offset]=${page}`;
+                        hash= `#/page=${pagina}`
+                    }else if(location.hash.includes("#/search")){
+                        ApiURL = `${Anime_api.SEARCH}${query}&page[limit]=9&page[offset]=${page}`;
+                        hash=`#/search?search=${query}/${pagina}`
+                    }
+                   
+                    console.log(page)
+                    getAnimes(page,ApiURL); 
+                    history.pushState(null,"",hash)
             
                 }else if(e.target.matches("#back")){
                     page-=9;
@@ -68,7 +80,15 @@ let page = Anime_api.page,
                     }else{
                         document.getElementById("back").setAttribute("disabled","")
                     }
-                    getAnimes(page);
+
+                    if(!location.hash|| location.hash === "#/home" || location.hash === ("#/0")){
+                        ApiURL = `${Anime_api.ANIMES}?page[limit]=9&page[offset]=${page}`;
+                    }else if(location.hash.includes("#/search")){
+                        ApiURL = `${Anime_api.SEARCH}${query}&page[limit]=9&page[offset]=${page}`;
+                    }
+
+                    console.log(page)
+                    getAnimes(page,ApiURL);
                     history.pushState(null,"",`#/${pagina}`);
                 }
             })
@@ -136,6 +156,7 @@ let page = Anime_api.page,
    window.addEventListener("hashchange",e => {
            
             Anime_api.page = 0
+            Anime_api.number_page = 0
             peticion();
 
   
