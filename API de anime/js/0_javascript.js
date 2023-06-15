@@ -49,7 +49,7 @@ let page = Anime_api.page,
         document.querySelector(".btns").style.display = "none";  
           
         let id = localStorage.getItem("PostId")
-        //console.log(id)
+      
         ajax({
             url : `https://kitsu.io/api/edge/anime/${id}`,
             cbSuccess:(post) => {
@@ -69,14 +69,12 @@ let page = Anime_api.page,
     //<---FUNCION DE PAGINACION--->
     const paginacion =  () => {
             const $form = document.querySelector(".btns")
-            let query = localStorage.getItem("query")
-           let hash = Anime_api.hash; 
-
-          
 
             $form.addEventListener("click",  e => { 
                 
-
+                let query = localStorage.getItem("query"),
+                hash = Anime_api.hash; 
+                
                 if(e.target.matches("#next")){
                     document.getElementById("back").removeAttribute("disabled");
                     page+=9;
@@ -167,24 +165,26 @@ let page = Anime_api.page,
 
 /////// <-----Funcion Show Anime--->
 const showAnime = (props) =>{
-        let {coverImage,posterImage} = props
+        let {coverImage,posterImage,titles,synopsis} = props
 
         let img = coverImage
-         ?  coverImage.original
+         ?  coverImage.original 
          : "assets/files/no-image-available.jpeg"
 
-
+//
 
             return `
-
-                  
-                 <div>
-                    <img class="banner" src="${img}"></img>
-                  </div>
+           
+                    <img class="banner" src="${img}">
+                    <div class="shadow"></div>
+               
                     <section class="section-flex">
                         <div class="portada">
-                            <img  class="img-portada" src="${posterImage.original}" ></img>
-                        </div>
+                            <h2>${titles.en}</h2>
+                            <img  class="img-portada" src="${posterImage.original}" >
+                            <p class="sinopsis">${synopsis}</p>
+                        </div>    
+                        <div>
                         <nav class="navbar">
                              <ul>
                               <li><a href="#/sinopsis">Sinopsis</a></li>
@@ -192,7 +192,8 @@ const showAnime = (props) =>{
                               <li><a href="#/categorias">Categorias</a></li>
                              </ul>
                         </nav>
-                    </section>
+                        
+                        </section>
               
                     <br> <br>
                     <br>
