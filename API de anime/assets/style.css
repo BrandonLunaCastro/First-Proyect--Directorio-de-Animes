@@ -106,10 +106,12 @@ header:hover{
 
 
 .banner{
+  
+    height: 400px;
     width: 100%;
-    height: 100%;
+    max-width: 100%;
     top: 0;
-    object-fit: cover;
+    
 }
 .img-portada{
         width: 100%;
