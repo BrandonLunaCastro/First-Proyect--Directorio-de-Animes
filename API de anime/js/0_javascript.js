@@ -11,11 +11,15 @@ let page = Anime_api.page,
 
     //<---FUNCION PETICION--->
     const peticion = async () => { 
-    
+    document.querySelector(".btns").style.display = "flex"
     const $main = document.querySelector("main"),
-   
     {hash} = location,
     $loader = document.querySelector(".loader")    
+
+
+    document.querySelector("header").classList.remove("position-header")
+    document.querySelector("header").classList.remove("header:hover")
+
 
     $main.innerHTML = null
     if(!hash || hash === "#/home"|| hash === "#/0") {  
@@ -43,8 +47,22 @@ let page = Anime_api.page,
 
            getAnimes(page,ApiURL)
     }else{
-      $main.innerHTML =  ` <h1>Aqui cargara al anime seleccionado</h1>`
-        document.querySelector(".btns").style.display = "none"
+        $main.innerHTML =  ` <h1>Aqui cargara al anime seleccionado</h1>`;
+        
+        document.querySelector("header").classList.add("position-header");
+        document.querySelector(".btns").style.display = "none"; 
+
+        window.addEventListener("scroll",e => {
+            let {scrollTop} = document.documentElement
+            console.log(scrollTop)
+            if(scrollTop >= 60){
+                document.querySelector(".position-header").style.background = "inherit";
+            }else{
+               
+            }
+
+        })
+          
         let id = localStorage.getItem("PostId")
         //console.log(id)
         ajax({
@@ -167,18 +185,40 @@ let page = Anime_api.page,
 
 /////// <-----Funcion Show Anime--->
 const showAnime = (props) =>{
-        let {coverImage} = props
+        let {coverImage,posterImage} = props
+
+        let img = coverImage
+         ?  coverImage.original
+         : "assets/files/no-image-available.jpeg"
+
 
 
             return `
 
-                  <div class="global-container>
-                    <div class="seccion1">
-                        <img class="img-portada" src="${coverImage.original}"></img>
-                        <nav></nav>
-                    </div>
+                  
+                 <div>
+                    <img class="banner" src="${img}"></img>
                   </div>
-            
+                    <section class="section-flex">
+                        <div class="portada">
+                            <img  class="img-portada" src="${posterImage.original}" ></img>
+                        </div>
+                        <nav class="navbar">
+                             <ul>
+                              <li><a href="#/sinopsis">Sinopsis</a></li>
+                              <li><a href="#/personajes">Personajes</a></li>
+                              <li><a href="#/categorias">Categorias</a></li>
+                             </ul>
+                        </nav>
+                    </section>
+              
+                    <br> <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
             `;
     
   
