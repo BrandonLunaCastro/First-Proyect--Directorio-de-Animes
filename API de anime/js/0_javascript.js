@@ -8,8 +8,6 @@ let page = Anime_api.page,
         
 //////Funciones//////
 
-///URL QUE SIRVE https://kitsu.io/api/edge/anime?filter[text]=naruto&page[limit]=2&page[offset]=0
-
 
     //<---FUNCION PETICION--->
     const peticion = async () => { 
@@ -32,6 +30,7 @@ let page = Anime_api.page,
 
     }else if(hash.includes("#/search")){
         console.log("seccion buscador") 
+        document.querySelector(".btns").style.display = "flex"
         page=0;
         pagina=0;
         let query = localStorage.getItem("query")
@@ -45,7 +44,7 @@ let page = Anime_api.page,
            getAnimes(page,ApiURL)
     }else{
       $main.innerHTML =  ` <h1>Aqui cargara al anime seleccionado</h1>`
-
+        document.querySelector(".btns").style.display = "none"
         let id = localStorage.getItem("PostId")
         //console.log(id)
         ajax({
@@ -53,8 +52,10 @@ let page = Anime_api.page,
             cbSuccess:(post) => {
                 let html = ""
                 console.log(post.data)
-            
+                let data = post.data
+                html+= showAnime(data.attributes)
                 
+                $main.innerHTML = html
             }
         })
 
@@ -67,7 +68,9 @@ let page = Anime_api.page,
             const $form = document.querySelector(".btns")
             let query = localStorage.getItem("query")
            let hash = Anime_api.hash; 
-           
+
+          
+
             $form.addEventListener("click",  e => { 
                 
 
@@ -164,14 +167,14 @@ let page = Anime_api.page,
 
 /////// <-----Funcion Show Anime--->
 const showAnime = (props) =>{
-        let {} = props
+        let {coverImage} = props
 
 
             return `
 
                   <div class="global-container>
                     <div class="seccion1">
-                        <img></img>
+                        <img class="img-portada" src="${coverImage.original}"></img>
                         <nav></nav>
                     </div>
                   </div>
@@ -181,7 +184,7 @@ const showAnime = (props) =>{
   
         }
 
-
+///https://kitsu.io/api/edge/anime/1555/anime-characters ruta que sirve para los characters 
 ////Cargas al DOM////
     document.addEventListener("DOMContentLoaded",e => {
             document.querySelector("main").innerHTML = null    
