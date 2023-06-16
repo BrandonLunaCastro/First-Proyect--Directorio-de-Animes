@@ -1,30 +1,4 @@
-.section-flex{
-    display: flex;
-    margin: 1rem auto;
-    align-items: center;
-    color: black;
-    border:  3px solid black; 
-    padding-left: 0px;
- 
-}
-.section-flex h2 {
-    display: flex;
-    border : 2px solid black;
-  justify-content: center;
-    width: 100%;
-    margin: 1rem 2rem;
-}
-/* .navbar{
-    color: black;
-    background-color: aliceblue;
-    display: inherit;
-    flex-direction: column;
-}
-.navbar ul {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-} */
+
 
 .banner{
     height: 450px;
@@ -40,26 +14,6 @@
     bottom: 159px;
     width: 100%;
     background-color:rgba(0,0,0,.5) ;
-}
-.portada{
-     display: flex;
-     background-color: rgb(255, 121, 121);
-     flex-wrap: wrap;
-}
-.sinopsis{
-    display: inherit;
-    color: aliceblue;
-    flex-basis: 1;
-    width: 50%;
-    margin-top:1rem;
-}
-.img-portada{
-        width: 20%;
-        max-width: 20%;
-        height: 100%;
-        margin: 1rem 2rem;
-        object-fit: cover;
-        border:1.5px solid black;
 }
 
 .position-header{
