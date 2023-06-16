@@ -177,18 +177,21 @@ const showAnime = (props) =>{
 
             document.addEventListener("click",e => {
              
+                //sinopsis
                 if(e.target.matches("#sinopsis")){
                     e.preventDefault();
                    document.querySelector(".contenido").innerHTML = `<p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>`// `${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}`
                 }
+                //categorias
                  if(e.target.matches("#categorias")){
                     e.preventDefault();
                   /*   ajax({
                         url: ``,
                     }) */
 
-                    document.querySelector(".contenido").innerHTML= `<p class="sinopsis">Aqui carga las categorias</p>`
+                    document.querySelector(".contenido").innerHTML= `<p class="categorias">Aqui carga las categorias</p>`
                 }
+                //personajes
                 if(e.target.matches("#personajes")){
                     e.preventDefault();
                     console.log("aqui van los personajes");
@@ -199,12 +202,12 @@ const showAnime = (props) =>{
                         cbSuccess:(info)=>{
                                 console.log(info.data)
                                 let data = info.data
-                            
                                 data.forEach((el)=>{
                                    // console.log(el.id)
                                     character(el.id)
                                 })
-                               
+                                
+            
 
                             }
                     })
@@ -218,8 +221,6 @@ const showAnime = (props) =>{
            
                 <img class="banner" src="${img}">
                     <div class="shadow"></div>
-                   
-
                         <nav>
                              <ul>
                               <li><a id="sinopsis" href="#/sinopsis">Sinopsis</a></li>
@@ -232,9 +233,10 @@ const showAnime = (props) =>{
                         <figure class="portada">    
                             <img  src="${posterImage.original}" >
                             <figcaption>${titulo}</figcaption>   
-                        </figure>   
-                        <div class="contenido"></div>
-                        </section>
+                        </figure>
+                        </section>  
+                        <section class="contenido"></section>
+                        
             `;
     
   
