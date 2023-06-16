@@ -1,4 +1,5 @@
 import Anime_api from "./modulos/Anime_api.js"
+import character from "./modulos/Characters.js";
 import { posts } from "./modulos/Post_home.js"
 import ajax from "./modulos/ajax.js"
 
@@ -174,14 +175,11 @@ const showAnime = (props) =>{
          : "assets/files/no-image-available.jpeg",
         titulo = titles.en ? titles.en : titles.en_jp
 
-
-             
-
             document.addEventListener("click",e => {
              
                 if(e.target.matches("#sinopsis")){
                     e.preventDefault();
-                   document.querySelector(".contenido").textContent = "aqui carga la sinopsis"// `${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}`
+                   document.querySelector(".contenido").innerHTML = `<p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>`// `${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}`
                 }
                  if(e.target.matches("#categorias")){
                     e.preventDefault();
@@ -191,7 +189,27 @@ const showAnime = (props) =>{
 
                     document.querySelector(".contenido").textContent= " AQUI CARGAN LAS CATEGORIAS"
                 }
+                if(e.target.matches("#personajes")){
+                    e.preventDefault();
+                    console.log("aqui van los personajes");
+                    let id = localStorage.getItem("PostId")
 
+                    ajax({
+                        url:`https:kitsu.io/api/edge/anime/${id}/relationships/anime-characters`,
+                        cbSuccess:(info)=>{
+                                console.log(info.data)
+                                let data = info.data
+                            
+                                data.forEach((el)=>{
+                                   // console.log(el.id)
+                                    character(el.id)
+                                })
+                               
+
+                            }
+                    })
+                
+                }
 
             })
             
@@ -200,12 +218,14 @@ const showAnime = (props) =>{
            
                 <img class="banner" src="${img}">
                     <div class="shadow"></div>
-                    <section class="section-flex">
+                    <section>
                         <div class="portada">
                             <h2>${titulo}</h2>
                             <img  class="img-portada" src="${posterImage.original}" >
-                            <p class="contenido">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
-                        </div>    
+                        </div>   
+                        <div class="contenido">            
+                        </div>
+                            
                         <div>
                         <nav class="navbar">
                              <ul>
