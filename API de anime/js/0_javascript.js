@@ -62,6 +62,7 @@ let page = Anime_api.page,
             }
         })
 
+   
     }
     $loader.style.display = "none"
 }
@@ -166,42 +167,55 @@ let page = Anime_api.page,
 /////// <-----Funcion Show Anime--->
 const showAnime = (props) =>{
         let {coverImage,posterImage,titles,synopsis} = props
+        
 
         let img = coverImage
          ?  coverImage.original 
-         : "assets/files/no-image-available.jpeg"
+         : "assets/files/no-image-available.jpeg",
+        titulo = titles.en ? titles.en : titles.en_jp
 
-//
+
+             
+
+            document.addEventListener("click",e => {
+             
+                if(e.target.matches("#sinopsis")){
+                    e.preventDefault();
+                   document.querySelector(".contenido").textContent = "aqui carga la sinopsis"// `${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}`
+                }
+                 if(e.target.matches("#categorias")){
+                    e.preventDefault();
+                  /*   ajax({
+                        url: ``,
+                    }) */
+
+                    document.querySelector(".contenido").textContent= " AQUI CARGAN LAS CATEGORIAS"
+                }
+
+
+            })
+            
 
             return `
            
-                    <img class="banner" src="${img}">
+                <img class="banner" src="${img}">
                     <div class="shadow"></div>
-               
                     <section class="section-flex">
                         <div class="portada">
-                            <h2>${titles.en}</h2>
+                            <h2>${titulo}</h2>
                             <img  class="img-portada" src="${posterImage.original}" >
-                            <p class="sinopsis">${synopsis}</p>
+                            <p class="contenido">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
                         </div>    
                         <div>
                         <nav class="navbar">
                              <ul>
-                              <li><a href="#/sinopsis">Sinopsis</a></li>
-                              <li><a href="#/personajes">Personajes</a></li>
-                              <li><a href="#/categorias">Categorias</a></li>
+                              <li><a id="sinopsis" href="#/sinopsis">Sinopsis</a></li>
+                              <li><a id="personajes" href="#/personajes">Personajes</a></li>
+                              <li><a id="categorias" href="#/categorias">Categorias</a></li>
+                              <li><a id="info"  href="#/Informacion">Informacion</a></li>
                              </ul>
                         </nav>
-                        
-                        </section>
-              
-                    <br> <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
+                    </section>
             `;
     
   
@@ -219,7 +233,7 @@ const showAnime = (props) =>{
     })
 
    window.addEventListener("hashchange",e => {
-           
+        
             Anime_api.page = 0
             Anime_api.number_page = 0
             peticion();
