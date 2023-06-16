@@ -187,7 +187,7 @@ const showAnime = (props) =>{
                         url: ``,
                     }) */
 
-                    document.querySelector(".contenido").textContent= " AQUI CARGAN LAS CATEGORIAS"
+                    document.querySelector(".contenido").innerHTML= `<p class="sinopsis">Aqui carga las categorias</p>`
                 }
                 if(e.target.matches("#personajes")){
                     e.preventDefault();
@@ -218,24 +218,23 @@ const showAnime = (props) =>{
            
                 <img class="banner" src="${img}">
                     <div class="shadow"></div>
-                    <section>
-                        <div class="portada">
-                            <h2>${titulo}</h2>
-                            <img  class="img-portada" src="${posterImage.original}" >
-                        </div>   
-                        <div class="contenido">            
-                        </div>
-                            
-                        <div>
-                        <nav class="navbar">
+                   
+
+                        <nav>
                              <ul>
                               <li><a id="sinopsis" href="#/sinopsis">Sinopsis</a></li>
                               <li><a id="personajes" href="#/personajes">Personajes</a></li>
                               <li><a id="categorias" href="#/categorias">Categorias</a></li>
                               <li><a id="info"  href="#/Informacion">Informacion</a></li>
                              </ul>
-                        </nav>
-                    </section>
+                        </nav> 
+                        <section>
+                        <figure class="portada">    
+                            <img  src="${posterImage.original}" >
+                            <figcaption>${titulo}</figcaption>   
+                        </figure>   
+                        <div class="contenido"></div>
+                        </section>
             `;
     
   
