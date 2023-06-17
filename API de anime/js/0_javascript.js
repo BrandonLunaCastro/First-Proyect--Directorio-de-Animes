@@ -177,8 +177,8 @@ const showAnime =  (props) =>{
          : "assets/files/no-image-available.jpeg",
         titulo = titles.en ? titles.en : titles.en_jp,
         dateStart = new Date(startDate).toDateString(),
-        dateEnd = new Date(endDate).toDateString();
-        
+        dateEnd = new Date(endDate).toDateString(),
+        id = localStorage.getItem("PostId")
         
 
         document.addEventListener("click",async e => {
@@ -194,6 +194,19 @@ const showAnime =  (props) =>{
                  if(e.target.matches("#categorias")){
                     document.querySelector(".contenido").innerHTML = null;
                     e.preventDefault();
+
+                    await ajax({
+                        url:`https://kitsu.io/api/edge/anime/${id}/categories`,
+                        cbSuccess:(categories)=> {
+                              let data = categories.data;
+                                //console.log(categories.data)
+                                data.forEach((el)=>{
+                                    console.log(el.attributes)
+                                })
+
+                        }
+                    })
+
                     document.querySelector(".contenido").innerHTML= `<p class="categorias">Aqui carga las categ</p>`
                 }
                 //personajes
@@ -201,7 +214,7 @@ const showAnime =  (props) =>{
                     e.preventDefault();
                     document.querySelector(".contenido").innerHTML = null;
                     console.log("aqui van los personajes");
-                    let id = localStorage.getItem("PostId")
+                    
                     const $contenido = document.querySelector(".contenido");
 
                     await ajax({
@@ -238,12 +251,12 @@ const showAnime =  (props) =>{
                                 <div class="detalles">
                                     <h3>Detalles del Anime</h5>
                                     <ul>
-                                        <li><strong>Japonés</strong>:                    <span>${titles.ja_jp}</span></li>
-                                        <li><strong>Japonés(Romaji)</strong>:        <span>${titles.en_jp}</span></li>
-                                        <li><strong>Tipo</strong>:                       <span>${showType}</span></li>
-                                        <li><strong>Episodios</strong>:            <span>${episodeCount}</span></li>
-                                        <li><strong>Estado</strong>:              <span>${status}</span></li>
-                                        <li><strong>Emitido</strong>:          <span>${dateStart} to ${dateEnd}</span></li> 
+                                        <li><strong>Japonés</strong><span>${titles.ja_jp}</span></li>
+                                        <li><strong>Japonés(Romaji)</strong><span>${titles.en_jp}</span></li>
+                                        <li><strong>Tipo</strong><span>${showType}</span></li>
+                                        <li><strong>Episodios</strong><span>${episodeCount}</span></li>
+                                        <li><strong>Estado</strong><span>${status}</span></li>
+                                        <li><strong>Emitido</strong><span>${dateStart} to ${dateEnd}</span></li> 
                                     </ul>
                                 </div>
                             </aside>    
