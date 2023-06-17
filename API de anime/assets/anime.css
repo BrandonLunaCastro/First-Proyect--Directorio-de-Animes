@@ -16,37 +16,45 @@
 
 .position-header{
     position:  fixed;
-    background:none;
+    /* background:none; */
 }
 
 
 .portada{
-    margin: 1rem auto;
+    margin: 1rem 1rem;
     text-align: center;
     font-size: 1.2rem;
-    width: 30%;
     background-color: rgba(0, 0, 0, .75);
     max-height: 100%;
-    border:2px solid black;
+   border:1.5px solid black;
 }
 .portada img{
    /*  width: 100%; */
-   width: 300px;
-    
+    width: 160px;
+    height: 200px;
 }
 .portada figcaption{
     padding:1rem;
 }
 .character{
-    background-color: red;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    display:flex;
-    width: 30%;
+    max-width: 173px;
+    background-color: rgba(255, 255, 255);
+    color: black;
+    height: 130px;
+    text-align: center;
+    font-size: 0.7rem;
+    border: 2px solid rgb(128, 128, 128);
+}
+
+.character img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
 
 }
+
 
     nav{
  
@@ -74,16 +82,17 @@
         border: 1px solid white;
         background-color: rgba(0, 0, 0, .75);
     }
-    section{
+/*     section{
         display: flex;
         flex-wrap: wrap;
         margin-top: 1rem;
-    }
+    } */
 
     .contenido{
-        width: 60%;
-        box-sizing: border-box;
-        margin: 1rem auto ;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-left:2.5rem ;
     }
 
 
