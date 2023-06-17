@@ -1,15 +1,21 @@
 export function personaje(props){
 
     let {canonicalName,image} = props
+  
+    const $figure = document.createElement("figure"),
+    $img = document.createElement("img"),
+    $figcaption = document.createElement("figcaption")
 
-    return `
-        <figure class="character">
-            <img src="${image.original}" alt="imagen del personaje">
-            <figcaption>${canonicalName}</figcaption>
-        </figure>
+
+    $figure.appendChild($img)
+    $figure.appendChild($figcaption)
+    $figure.classList.add("character")
+
+    $img.setAttribute("src",`${image.original}`);
+    $img.alt = "imagen del personaje";
+    $figcaption.textContent = canonicalName;
+
+    return $figure;
+
     
-    
-    `
-
-
 }
