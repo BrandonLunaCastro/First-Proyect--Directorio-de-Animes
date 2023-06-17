@@ -51,9 +51,11 @@ let page = Anime_api.page,
           
         let id = localStorage.getItem("PostId")
       
+        
         ajax({
             url : `https://kitsu.io/api/edge/anime/${id}`,
             cbSuccess:(post) => {
+               
                 let html = ""
                 console.log(post.data)
                 let data = post.data
@@ -167,34 +169,36 @@ let page = Anime_api.page,
 
 /////// <-----Funcion Show Anime--->
 const showAnime =  (props) =>{
-        let {coverImage,posterImage,titles,synopsis} = props
+        let {showType,episodeCount,status,coverImage,posterImage,titles,synopsis,startDate,endDate} = props
         
 
         let img = coverImage
          ?  coverImage.original 
          : "assets/files/no-image-available.jpeg",
-        titulo = titles.en ? titles.en : titles.en_jp
+        titulo = titles.en ? titles.en : titles.en_jp,
+        dateStart = new Date(startDate).toDateString(),
+        dateEnd = new Date(endDate).toDateString();
         
         
+
         document.addEventListener("click",async e => {
-            
+               
                 //sinopsis
                 if(e.target.matches("#sinopsis")){
+                    document.querySelector(".contenido").innerHTML = null;
                     e.preventDefault();
                     document.querySelector(".contenido").innerHTML = `<p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>`// `${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}`
                 }
                 //categorias
                  if(e.target.matches("#categorias")){
+                    document.querySelector(".contenido").innerHTML = null;
                     e.preventDefault();
-                  /*   ajax({
-                        url: ``,
-                    }) */
-
-                    document.querySelector(".contenido").innerHTML= `<p class="categorias">Aqui carga las categorias</p>`
+                    document.querySelector(".contenido").innerHTML= `<p class="categorias">Aqui carga las categ</p>`
                 }
                 //personajes
                 if(e.target.matches("#personajes")){
                     e.preventDefault();
+                    document.querySelector(".contenido").innerHTML = null;
                     console.log("aqui van los personajes");
                     let id = localStorage.getItem("PostId")
                     const $contenido = document.querySelector(".contenido");
@@ -216,25 +220,38 @@ const showAnime =  (props) =>{
             
 
             return `
-           
-                <img class="banner" src="${img}">
+                    <img class="banner" src="${img}">
                     <div class="shadow"></div>
-                        <nav>
-                             <ul>
-                              <li><a id="sinopsis" href="#/sinopsis">Sinopsis</a></li>
-                              <li><a id="personajes" href="#/personajes">Personajes</a></li>
-                              <li><a id="categorias" href="#/categorias">Categorias</a></li>
-                              <li><a id="info"  href="#/Informacion">Informacion</a></li>
-                             </ul>
-                        </nav> 
-                        <section>
-                        <figure class="portada">    
-                            <img  src="${posterImage.original}" >
-                            <figcaption>${titulo}</figcaption>   
-                        </figure>
-                        </section>  
-                        <section class="contenido"></section>
-                        
+
+                        <div class="contenedor">
+                            <nav>
+                                <ul>
+                                  <li><a id="sinopsis" href="#/sinopsis">Sinopsis</a></li>
+                                  <li><a id="personajes" href="#/personajes">Personajes</a></li>
+                                  <li><a id="categorias" href="#/categorias">Categorias</a></li>
+                                  <li><a id="info"  href="#/Informacion">Informacion</a></li>
+                                </ul>
+                            </nav> 
+                            <aside class="sidebar">
+                                <img  src="${posterImage.large}" class="portada">
+                                <div class="detalles">
+                                    <h3>Detalles del Anime</h5>
+                                    <ul>
+                                        <li><strong>Japonés</strong>:                    <span>${titles.ja_jp}</span></li>
+                                        <li><strong>Japonés(Romaji)</strong>:        <span>${titles.en_jp}</span></li>
+                                        <li><strong>Tipo</strong>:                       <span>${showType}</span></li>
+                                        <li><strong>Episodios</strong>:            <span>${episodeCount}</span></li>
+                                        <li><strong>Estado</strong>:              <span>${status}</span></li>
+                                        <li><strong>Emitido</strong>:          <span>${dateStart} to ${dateEnd}</span></li> 
+                                    </ul>
+                                </div>
+                            </aside>    
+                                <section>
+                                     <h2 class="title">${titulo}</h2>
+                                    <div class="contenido"></div>
+                                    </section>
+                        </div>
+                       
             `;
     
   
