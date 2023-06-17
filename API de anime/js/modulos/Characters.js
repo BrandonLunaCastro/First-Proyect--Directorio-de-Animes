@@ -11,7 +11,7 @@ export default   function  character(elements){
             cbSuccess:(persona)=>{
                 let data = persona.data
             
-                console.log(personaje(data.attributes));
+              //  console.log(personaje(data.attributes));
                 const targeta = personaje(data.attributes)
                 $contenido.appendChild(targeta)
             }
