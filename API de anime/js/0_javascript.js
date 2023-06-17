@@ -200,9 +200,10 @@ const showAnime =  (props) =>{
                     const $contenido = document.querySelector(".contenido");
 
                     await ajax({
-                        url:`https:kitsu.io/api/edge/anime/${id}/relationships/anime-characters`,
+                        url:`https://kitsu.io/api/edge/anime/${id}/characters?page[limit]=12`,  //https://kitsu.io/api/edge/anime/${id}/relationships/anime-characters?page[limit]=10
                         cbSuccess:(info)=>{
                                 let data = info.data
+                                console.log(data)
                                  data.forEach((el)=>{ 
                                         character(el)
                                 })          
