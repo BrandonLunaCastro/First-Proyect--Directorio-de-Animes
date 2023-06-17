@@ -166,7 +166,7 @@ let page = Anime_api.page,
     };
 
 /////// <-----Funcion Show Anime--->
-const showAnime = (props) =>{
+const showAnime =  (props) =>{
         let {coverImage,posterImage,titles,synopsis} = props
         
 
@@ -174,13 +174,14 @@ const showAnime = (props) =>{
          ?  coverImage.original 
          : "assets/files/no-image-available.jpeg",
         titulo = titles.en ? titles.en : titles.en_jp
-
-            document.addEventListener("click",e => {
-             
+        
+        
+        document.addEventListener("click",async e => {
+            
                 //sinopsis
                 if(e.target.matches("#sinopsis")){
                     e.preventDefault();
-                   document.querySelector(".contenido").innerHTML = `<p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>`// `${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}`
+                    document.querySelector(".contenido").innerHTML = `<p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>`// `${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}`
                 }
                 //categorias
                  if(e.target.matches("#categorias")){
@@ -196,19 +197,15 @@ const showAnime = (props) =>{
                     e.preventDefault();
                     console.log("aqui van los personajes");
                     let id = localStorage.getItem("PostId")
+                    const $contenido = document.querySelector(".contenido");
 
-                    ajax({
+                    await ajax({
                         url:`https:kitsu.io/api/edge/anime/${id}/relationships/anime-characters`,
                         cbSuccess:(info)=>{
-                                console.log(info.data)
                                 let data = info.data
-                                data.forEach((el)=>{
-                                   // console.log(el.id)
-                                    character(el.id)
-                                })
-                                
-            
-
+                                 data.forEach((el)=>{ 
+                                        character(el)
+                                })          
                             }
                     })
                 
