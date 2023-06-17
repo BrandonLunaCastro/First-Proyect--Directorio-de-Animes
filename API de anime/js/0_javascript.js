@@ -190,6 +190,7 @@ const showAnime =  (props) =>{
                     document.querySelector(".contenido").innerHTML = `<p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>`// `${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}`
                 }
                 //categorias
+                    //https://kitsu.io/api/edge/anime/45(id que esta en App)/categories ruta de las categorias 
                  if(e.target.matches("#categorias")){
                     document.querySelector(".contenido").innerHTML = null;
                     e.preventDefault();
