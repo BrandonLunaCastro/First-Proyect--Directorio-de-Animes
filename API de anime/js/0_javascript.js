@@ -178,16 +178,23 @@ const showAnime =  (props) =>{
         titulo = titles.en ? titles.en : titles.en_jp,
         dateStart = new Date(startDate).toDateString(),
         dateEnd = new Date(endDate).toDateString(),
-        id = localStorage.getItem("PostId")
+        id = localStorage.getItem("PostId"),
+        year = new Date(startDate).getFullYear();
         
+        
+
 
         document.addEventListener("click",async e => {
                
                 //sinopsis
                 if(e.target.matches("#sinopsis")){
                     document.querySelector(".contenido").innerHTML = null;
-                    e.preventDefault();
-                    document.querySelector(".contenido").innerHTML = `<p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>`// `${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}`
+                  //  e.preventDefault();
+                    document.querySelector(".contenido").innerHTML = `
+                                    <p class="title"> <strong>${titulo}</strong>${year}</p> 
+                                    <p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
+                                    
+                                    `
                 }
                 //categorias
                     //https://kitsu.io/api/edge/anime/45(id que esta en App)/categories ruta de las categorias 
@@ -201,7 +208,6 @@ const showAnime =  (props) =>{
                         url:`https://kitsu.io/api/edge/anime/${id}/categories`,
                         cbSuccess:(categories)=> {
                               let data = categories.data;
-                                //console.log(categories.data)
                                 data.forEach((el)=>{
                                     const $li = document.createElement("li");
                                     $li.textContent = el.attributes.title
@@ -211,7 +217,6 @@ const showAnime =  (props) =>{
                         }
                     })
 
-                  //  document.querySelector(".contenido").innerHTML= `<p class="categorias">Aqui carga las categ</p>`
                 }
                 //personajes
                 if(e.target.matches("#personajes")){
@@ -222,7 +227,7 @@ const showAnime =  (props) =>{
                     const $contenido = document.querySelector(".contenido");
 
                     await ajax({
-                        url:`https://kitsu.io/api/edge/anime/${id}/characters?page[limit]=12`,  //https://kitsu.io/api/edge/anime/${id}/relationships/anime-characters?page[limit]=10
+                        url:`https://kitsu.io/api/edge/anime/${id}/characters?page[limit]=20`,  //https://kitsu.io/api/edge/anime/${id}/relationships/anime-characters?page[limit]=10
                         cbSuccess:(info)=>{
                                 let data = info.data
                                 console.log(data)
@@ -240,8 +245,6 @@ const showAnime =  (props) =>{
             return `
                     <img class="banner" src="${img}">
                     <div class="shadow"></div>
-
-                        <div class="contenedor">
                             <nav>
                                 <ul>
                                   <li><a id="sinopsis" href="#/sinopsis">Sinopsis</a></li>
@@ -249,6 +252,7 @@ const showAnime =  (props) =>{
                                   <li><a id="categorias" href="#/categorias">Categorias</a></li>
                                 </ul>
                             </nav> 
+                        <div class="contenedor">
                             <aside class="sidebar">
                                 <img  src="${posterImage.large}" class="portada">
                                 <div class="detalles">
@@ -264,7 +268,7 @@ const showAnime =  (props) =>{
                                 </div>
                             </aside>    
                                 <section>
-                                     <h2 class="title">${titulo}</h2>
+                                     
                                     <div class="contenido"></div>
                                     </section>
                         </div>
