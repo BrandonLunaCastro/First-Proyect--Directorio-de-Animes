@@ -149,3 +149,12 @@ main{
 .targeta h2{
     text-align: center;
 }
+footer{
+    background-image: url(files/paul-volkmer-qVotvbsuM_c-unsplash.jpg);
+    color: #fff;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
