@@ -21,7 +21,7 @@
 
 .contenedor{
     display: flex;
-   margin: 0.5rem 30px;
+    margin: 0.5rem 30px;
     
     
 }
@@ -29,11 +29,13 @@
 .sidebar{
     background-color: rgba(0, 0, 0, 0.74);
     display: flex;
+    padding-top: 0.5rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 15rem;
-    max-height: 600px;
+    max-height: 540px;
+    max-width: 200px;
     margin: 0.5rem auto;
 }
 .portada{
@@ -107,12 +109,19 @@
      .contenido{
         display: flex; 
         flex-wrap: wrap;
-        justify-content: center;
+        /* flex-direction: column; */
         width: 100%;
         color: #000000;
         margin: 2rem 0 ;
     }
- 
+    .contenido p{
+        margin-left: 2rem;
+    }
+    
+    .title{
+        font-size: 1.5rem;
+    }
+
     strong{
         margin-right:  6px;
     }
@@ -124,6 +133,26 @@
     .sinopsis{
         display: block;
         margin:0 2rem;
+    }
+
+    .vacio{
+            display:inherit;  
+            margin: 1rem 3rem;
+            background-color: red;
+            color: #ffffff;
+            font-weight: bold;
+    }
+
+    .paragraph{
+        
+        font-weight: 600;
+        margin-bottom: 0;
+       width: 100%; 
+    }
+
+    .list-categories{
+        margin-top: 5px;
+        list-style-type: "✔" ;
     }
 
 
