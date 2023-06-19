@@ -210,7 +210,7 @@ const showAnime =  (props) =>{
                     $contenido.innerHTML = `
                                     <p > <strong class="title">${titulo}</strong>${year}</p> 
                                     <p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
-                                   
+              
                                     `;
 
                     $p.classList.add("paragraph")
