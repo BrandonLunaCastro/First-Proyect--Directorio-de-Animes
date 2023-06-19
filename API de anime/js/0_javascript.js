@@ -181,29 +181,20 @@ const showAnime =  (props) =>{
         id = localStorage.getItem("PostId"),
         year = new Date(startDate).getFullYear();
         
-        
+   
 
 
         document.addEventListener("click",async e => {
-               
+                    const $contenido =  document.querySelector(".contenido")
                 //sinopsis
                 if(e.target.matches("#sinopsis")){
-                    document.querySelector(".contenido").innerHTML = null;
-                   e.preventDefault();
-                    document.querySelector(".contenido").innerHTML = `
-                                    <p class="title"> <strong>${titulo}</strong>${year}</p> 
-                                    <p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
-                                    
-                                    `
-                }
-                //categorias
-                    //https://kitsu.io/api/edge/anime/45(id que esta en App)/categories ruta de las categorias 
-                 if(e.target.matches("#categorias")){
-                    e.preventDefault();
-                    
-                    const $contenido =  document.querySelector(".contenido"),
-                    $ul = document.createElement("ul")
+                    e.preventDefault(); 
+                    const $ul = document.createElement("ul"),
+                    $p = document.createElement("p");
+                    $p.textContent = "Categorias :";
                     $contenido.innerHTML = null;
+                    
+                    //solicitamos las categorias
                     await ajax({
                         url:`https://kitsu.io/api/edge/anime/${id}/categories`,
                         cbSuccess:(categories)=> {
@@ -213,10 +204,27 @@ const showAnime =  (props) =>{
                                     $li.textContent = el.attributes.title
                                     $ul.appendChild($li)
                                 })
-                                $contenido.appendChild($ul)
                         }
                     })
 
+                    $contenido.innerHTML = `
+                                    <p > <strong class="title">${titulo}</strong>${year}</p> 
+                                    <p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
+                                   
+                                    `;
+
+                    $p.classList.add("paragraph")
+                    $ul.classList.add("list-categories")
+
+                    $contenido.appendChild($p)                
+                    $contenido.appendChild($ul)
+                }
+                //episodios
+                   
+                 if(e.target.matches("#episodios")){
+                    e.preventDefault();
+                    
+                 
                 }
                 //personajes
                 if(e.target.matches("#personajes")){
@@ -231,9 +239,15 @@ const showAnime =  (props) =>{
                         cbSuccess:(info)=>{
                                 let data = info.data
                                 console.log(data)
-                                 data.forEach((el)=>{ 
+                                if(data.length === 0){                    
+                                    $contenido.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
+                                }else {
+                                     data.forEach((el)=>{ 
                                         character(el)
-                                })          
+                                     }) 
+                                }
+
+                                      
                             }
                     })
                 
@@ -249,7 +263,7 @@ const showAnime =  (props) =>{
                                 <ul>
                                   <li><a id="sinopsis" href="#/sinopsis">Sinopsis</a></li>
                                   <li><a id="personajes" href="#/personajes">Personajes</a></li>
-                                  <li><a id="categorias" href="#/categorias">Categorias</a></li>
+                                  <li><a id="categorias" href="#/categorias">Episodios</a></li>
                                 </ul>
                             </nav> 
                         <div class="contenedor">
