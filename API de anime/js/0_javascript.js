@@ -189,7 +189,7 @@ const showAnime =  (props) =>{
                 //sinopsis
                 if(e.target.matches("#sinopsis")){
                     document.querySelector(".contenido").innerHTML = null;
-                  //  e.preventDefault();
+                   e.preventDefault();
                     document.querySelector(".contenido").innerHTML = `
                                     <p class="title"> <strong>${titulo}</strong>${year}</p> 
                                     <p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
