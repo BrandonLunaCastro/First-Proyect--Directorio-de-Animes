@@ -10,8 +10,7 @@ export default   function  character(elements){
             url:`https://kitsu.io/api/edge/anime-characters/${id}/character`,
             cbSuccess:(persona)=>{
                 let data = persona.data
-            
-              //  console.log(personaje(data.attributes));
+                console.log(data)
                 const targeta = personaje(data.attributes)
                 $contenido.appendChild(targeta)
             }
