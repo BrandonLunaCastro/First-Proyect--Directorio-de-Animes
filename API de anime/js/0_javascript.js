@@ -247,7 +247,6 @@ const showAnime =  (props) =>{
                                   <li><a id="sinopsis" href="#/sinopsis">Sinopsis</a></li>
                                   <li><a id="personajes" href="#/personajes">Personajes</a></li>
                                   <li><a id="categorias" href="#/categorias">Categorias</a></li>
-                                  <li><a id="info"  href="#/Informacion">Informacion</a></li>
                                 </ul>
                             </nav> 
                             <aside class="sidebar">
