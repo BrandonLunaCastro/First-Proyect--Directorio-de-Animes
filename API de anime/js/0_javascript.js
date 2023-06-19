@@ -254,12 +254,12 @@ const showAnime =  (props) =>{
                                 <div class="detalles">
                                     <h3>Detalles del Anime</h5>
                                     <ul>
-                                        <li><strong>Japonés</strong><span>${titles.ja_jp}</span></li>
-                                        <li><strong>Japonés(Romaji)</strong><span>${titles.en_jp}</span></li>
-                                        <li><strong>Tipo</strong><span>${showType}</span></li>
-                                        <li><strong>Episodios</strong><span>${episodeCount}</span></li>
-                                        <li><strong>Estado</strong><span>${status}</span></li>
-                                        <li><strong>Emitido</strong><span>${dateStart} to ${dateEnd}</span></li> 
+                                        <li><strong>Japonés:</strong><span>${titles.ja_jp}</span></li>
+                                        <li><strong>Japonés(Romaji):</strong><span>${titles.en_jp}</span></li>
+                                        <li><strong>Tipo:</strong><span>${showType}</span></li>
+                                        <li><strong>Episodios:</strong><span>${episodeCount}</span></li>
+                                        <li><strong>Estado:</strong><span>${status}</span></li>
+                                        <li><strong>Emitido:</strong><span>${dateStart} to ${dateEnd}</span></li> 
                                     </ul>
                                 </div>
                             </aside>    
