@@ -85,6 +85,7 @@
 .character{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     max-width: 173px;
     background-color: rgba(255, 255, 255);
     color: black;
