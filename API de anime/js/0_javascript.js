@@ -192,22 +192,26 @@ const showAnime =  (props) =>{
                 //categorias
                     //https://kitsu.io/api/edge/anime/45(id que esta en App)/categories ruta de las categorias 
                  if(e.target.matches("#categorias")){
-                    document.querySelector(".contenido").innerHTML = null;
                     e.preventDefault();
-
+                    
+                    const $contenido =  document.querySelector(".contenido"),
+                    $ul = document.createElement("ul")
+                    $contenido.innerHTML = null;
                     await ajax({
                         url:`https://kitsu.io/api/edge/anime/${id}/categories`,
                         cbSuccess:(categories)=> {
                               let data = categories.data;
                                 //console.log(categories.data)
                                 data.forEach((el)=>{
-                                    console.log(el.attributes)
+                                    const $li = document.createElement("li");
+                                    $li.textContent = el.attributes.title
+                                    $ul.appendChild($li)
                                 })
-
+                                $contenido.appendChild($ul)
                         }
                     })
 
-                    document.querySelector(".contenido").innerHTML= `<p class="categorias">Aqui carga las categ</p>`
+                  //  document.querySelector(".contenido").innerHTML= `<p class="categorias">Aqui carga las categ</p>`
                 }
                 //personajes
                 if(e.target.matches("#personajes")){
