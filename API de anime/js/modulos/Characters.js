@@ -4,10 +4,8 @@ import { personaje } from "./personaje.js";
 export default   function  character(elements){
         let {id} = elements,
         $contenido = document.querySelector(".contenido")
-        
-
-         ajax({
-            url:`https://kitsu.io/api/edge/anime-characters/${id}/character`,
+        ajax({
+            url:`https://kitsu.io/api/edge/media-characters/${id}/character`,
             cbSuccess:(persona)=>{
                 let data = persona.data
                 console.log(data)
