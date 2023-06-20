@@ -2,6 +2,8 @@ import Anime_api from "./modulos/Anime_api.js"
 import character from "./modulos/Characters.js";
 import { posts } from "./modulos/Post_home.js"
 import ajax from "./modulos/ajax.js"
+import { openTab } from "./modulos/openTab.js";
+
 
 let page = Anime_api.page,
      pagina = Anime_api.number_page,
@@ -60,10 +62,9 @@ let page = Anime_api.page,
                 console.log(post.data)
                 let data = post.data
                 html+= showAnime(data.attributes)
-                setTimeout(() => {
                 
                     $main.innerHTML = html  
-                }, 100);
+              
                 
             }
         })
@@ -170,25 +171,6 @@ let page = Anime_api.page,
 
     };
 
-/////<-----Funcion OpenTAB----->
-function openTab(event, section){
-    let $tabContent = document.querySelectorAll(".tabContent"),
-    $tabsLinks = document.querySelectorAll(".tabs-links");
-
-     for(let i = 0 ; i<$tabContent.length; i++){
-        $tabContent[i].style.display = "none";
-    }
-
-    for(let i = 0 ; i< $tabsLinks.length ; i++){
-            $tabsLinks[i].classList.remove("active")
-    }
-
-    document.getElementById(section).style.display = "block";
-    event.currentTarget.classList.add("active");
-}
-
-
-
 /////// <-----Funcion Show Anime--->
 const showAnime =  (props) =>{
         let {showType,episodeCount,status,coverImage,posterImage,titles,synopsis,startDate,endDate} = props
@@ -203,6 +185,10 @@ const showAnime =  (props) =>{
         id = localStorage.getItem("PostId"),
         year = new Date(startDate).getFullYear();
         
+        setTimeout(() => {
+            openTab()
+       
+       }, 100);
 
             return `
                          <img class="banner" src="${img}">
@@ -222,18 +208,26 @@ const showAnime =  (props) =>{
                                     </ul>
                                 </div>
                             </aside>    
-                            <!--Tabs Links-->
-                                <div class="tab">
-                                      <button class="tabs-links"  " id="sinopsis">Sinopsis</button>
-                                      <button class="tabs-links"  id="personajes">Personajes</button>
-                                      <button class="tabs-links"   id="episodios">Capitulos</button>
-                                 </div>
-
-                                <!--Tabs Content-->
-                                 <div class="tabcontent"  id="sinopsis" >  <p>Aca va la sinopsis</p> </div>
-                                 <div class="tabcontent"  id="personajes" > <p>Aca van los personajes</p> </div>
-                                 <div class="tabcontent"  id="episodios" > <p>Aca van los episodios</p> </div>
+                            <div class="tabs-container">
+                                <ul class="tabs" id="tabs">
+                                    <li id="sinopsis" class="tabs__item active">Sinopsis</li >
+                                    <li id="personajes" class="tabs__item ">Personajes</li >
+                                    <li id="episodios" class="tabs__item ">Episodios</li>
+                                </ul>
+                            <div class="panels">
+                                <div class="panel__items is-active">
+                                    <h2>Sinopsis</h2>
+                                </div>
+                                <div class="panel__items">
+                                    <h2>Personajes</h2>
+                                </div>
+                                <div class="panel__items">
+                                    <h2>Episodios</h2>
+                                </div>
+                            </div>
                         </div>
+
+               
                        
             `;
     
