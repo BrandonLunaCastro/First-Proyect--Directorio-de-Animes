@@ -60,8 +60,11 @@ let page = Anime_api.page,
                 console.log(post.data)
                 let data = post.data
                 html+= showAnime(data.attributes)
+                setTimeout(() => {
                 
-                $main.innerHTML = html
+                    $main.innerHTML = html  
+                }, 100);
+                
             }
         })
 
@@ -167,6 +170,25 @@ let page = Anime_api.page,
 
     };
 
+/////<-----Funcion OpenTAB----->
+function openTab(event, section){
+    let $tabContent = document.querySelectorAll(".tabContent"),
+    $tabsLinks = document.querySelectorAll(".tabs-links");
+
+     for(let i = 0 ; i<$tabContent.length; i++){
+        $tabContent[i].style.display = "none";
+    }
+
+    for(let i = 0 ; i< $tabsLinks.length ; i++){
+            $tabsLinks[i].classList.remove("active")
+    }
+
+    document.getElementById(section).style.display = "block";
+    event.currentTarget.classList.add("active");
+}
+
+
+
 /////// <-----Funcion Show Anime--->
 const showAnime =  (props) =>{
         let {showType,episodeCount,status,coverImage,posterImage,titles,synopsis,startDate,endDate} = props
@@ -181,105 +203,10 @@ const showAnime =  (props) =>{
         id = localStorage.getItem("PostId"),
         year = new Date(startDate).getFullYear();
         
-   
 
-
-        document.addEventListener("click",async e => {
-                    
-                    
-                //sinopsis
-                if(e.target.matches("#sinopsis")){
-                    
-                    const $ul = document.createElement("ul"),
-                    $p = document.createElement("p");
-                    $p.textContent = "Categorias :"
-
-                    let $tabcontent = document.getElementById("sinopsisContent")
-                  
-                    
-                    //solicitamos las categorias
-                    await ajax({
-                        url:`https://kitsu.io/api/edge/anime/${id}/categories`,
-                        cbSuccess:(categories)=> {
-                              let data = categories.data;
-                                data.forEach((el)=>{
-                                    const $li = document.createElement("li");
-                                    $li.textContent = el.attributes.title
-                                    $ul.appendChild($li)
-                                })
-                        }
-                    })
-
-                    $tabcontent.innerHTML = `
-                                    <p > <strong class="title">${titulo}</strong>${year}</p> 
-                                    <p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
-              
-                                    `;
-
-                    $p.classList.add("paragraph")
-                    $ul.classList.add("list-categories")
-
-                    $tabconten.appendChild($ul)
-                    $tabconten.appendChild($p)
-                 
-            }
-                //episodios
-                   
-                 if(e.target.matches("#episodios")){
-                    $contenido.innerHTML ="Aqui cargaran los episodios"
-                    
-                    
-                 
-                }
-          
-                //personajes
-                if(e.target.matches("#personajes")){
-                    e.preventDefault();
-                    location.hash = "/personajes"
-
-                    document.querySelector(".contenido").innerHTML = null;
-                    console.log("aqui van los personajes");
-                    
-                    const $contenido = document.querySelector(".contenido");
-
-                    await ajax({
-                        url:`https://kitsu.io/api/edge/anime/${id}/characters?page[limit]=20`,  //https://kitsu.io/api/edge/anime/${id}/relationships/anime-characters?page[limit]=10
-                        cbSuccess:(info)=>{
-                                let data = info.data
-                                console.log(data)
-                                if(data.length === 0){                    
-                                    $contenido.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
-                                }else {
-                                    $contenido.innerHTML = `<h3>Aqui carga la seccion de personajes</h3>`
-                                     data.forEach((el)=>{ 
-                                        character(el)
-                                     }) 
-                                }
-
-                                      
-                            }
-                    })
-                
-                }
-
-            })
-            
             return `
                          <img class="banner" src="${img}">
                          <div class="shadow"></div>
-                       
-                                <!--Tabs Links-->
-                                <div class="tab">
-                                      <button class="tabs-links" id="sinopsis" onclick="openTab(event,'sinopsis')">Sinopsis</button>
-                                      <button class="tabs-links" id="personajes" onclick="openTab(event,'personajes')">Personajes</button>
-                                      <button class="tabs-links" id="episodios" onclick="openTab(event,'capitulos')">Capitulos</button>
-                                 </div>
-
-                                <!--Tabs Content-->
-                                 <div class="tabcontent"  id="sinopsisContent" ></div>
-                                 <div class="tabcontent"  id="personajes" ></div>
-                                 <div class="tabcontent"  id="episodios" ></div>
-                     
                        <div class="contenedor">
                             <aside class="sidebar">
                                 <img  src="${posterImage.large}" class="portada">
@@ -295,10 +222,17 @@ const showAnime =  (props) =>{
                                     </ul>
                                 </div>
                             </aside>    
-                                <section>
-                                     
-                                    <div class="contenido"></div>
-                                    </section>
+                            <!--Tabs Links-->
+                                <div class="tab">
+                                      <button class="tabs-links"  " id="sinopsis">Sinopsis</button>
+                                      <button class="tabs-links"  id="personajes">Personajes</button>
+                                      <button class="tabs-links"   id="episodios">Capitulos</button>
+                                 </div>
+
+                                <!--Tabs Content-->
+                                 <div class="tabcontent"  id="sinopsis" >  <p>Aca va la sinopsis</p> </div>
+                                 <div class="tabcontent"  id="personajes" > <p>Aca van los personajes</p> </div>
+                                 <div class="tabcontent"  id="episodios" > <p>Aca van los episodios</p> </div>
                         </div>
                        
             `;
