@@ -1,17 +1,47 @@
-export function openTab(event, section){
-    let $tabContent = document.querySelectorAll(".tabContent"),
-    $tabsLinks = document.querySelectorAll(".tabs-links");
+export function openTab(){
 
-     for(let i = 0 ; i<$tabContent.length; i++){
-        $tabContent[i].style.display = "none";
-    }
+    let tabs = Array.from(document.querySelectorAll(".tabs__item")),
+        panels = Array.from(document.querySelectorAll(".panel__items"))
+    
+    //console.log(tabs, panels)
+    
 
-    for(let i = 0 ; i< $tabsLinks.length ; i++){
-            $tabsLinks[i].classList.remove("active")
-    }
 
-    document.getElementById(section).style.display = "block"
-    event.currentTarget.classList.add("active")
+    document.getElementById("tabs").addEventListener("click",e=> {
+            if(e.target.matches("#sinopsis")){
+                console.log("funciona en" , e.target)
+            
+                let index = tabs.indexOf(e.target)
+            
+                tabs.map(tab => tab.classList.remove("active"))
+                tabs[index].classList.add("active")
+                
+                panels.map(panel => panel.classList.remove("is-active"))
+                panels[index].classList.add("is-active")
+         
+            }
+            if(e.target.matches("#personajes")){
+               
+                let index = tabs.indexOf(e.target)
+               
+                tabs.map(tab => tab.classList.remove("active"))
+                tabs[index].classList.add("active")
+            
+                panels.map(panel => panel.classList.remove("is-active"))
+                panels[index].classList.add("is-active")
+            }
+            if(e.target.matches("#episodios")){
+        
+                let index = tabs.indexOf(e.target)
+        
+                tabs.map(tab => tab.classList.remove("active"))
+                tabs[index].classList.add("active")
+        
+                panels.map(panel => panel.classList.remove("is-active"))
+                panels[index].classList.add("is-active")
+        
+            }
+    })           
+
 }
-
 
