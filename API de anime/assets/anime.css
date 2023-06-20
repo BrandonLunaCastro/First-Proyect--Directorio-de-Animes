@@ -21,6 +21,9 @@
     /* max-height: 2.8rem; */
     display: block;
     margin: 0 auto;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    width: 100%;
   
 }
 .tab button{
@@ -43,6 +46,7 @@
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+    background-color: red;
 }
 
 
