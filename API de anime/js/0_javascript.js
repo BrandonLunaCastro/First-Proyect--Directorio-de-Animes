@@ -173,7 +173,7 @@ let page = Anime_api.page,
 
 /////// <-----Funcion Show Anime--->
 const showAnime =  (props) =>{
-        let {showType,episodeCount,status,coverImage,posterImage,titles,synopsis,startDate,endDate} = props
+        let {showType,episodeCount,status,coverImage,posterImage,titles,startDate,endDate} = props
         
 
         let img = coverImage
@@ -182,17 +182,15 @@ const showAnime =  (props) =>{
         titulo = titles.en ? titles.en : titles.en_jp,
         dateStart = new Date(startDate).toDateString(),
         dateEnd = new Date(endDate).toDateString(),
-        id = localStorage.getItem("PostId"),
         year = new Date(startDate).getFullYear();
         
         setTimeout(() => {
-            openTab()
-       
-       }, 100);
+            openTab(props)
+        }, 100);
 
             return `
-                         <img class="banner" src="${img}">
-                         <div class="shadow"></div>
+                    <img class="banner" src="${img}">
+                    <div class="shadow"></div>
                        <div class="contenedor">
                             <aside class="sidebar">
                                 <img  src="${posterImage.large}" class="portada">
@@ -215,8 +213,9 @@ const showAnime =  (props) =>{
                                     <li id="episodios" class="tabs__item ">Episodios</li>
                                 </ul>
                             <div class="panels">
-                                <div class="panel__items is-active">
+                                <div class="panel__items is-active" id="sinopsisContent">
                                     <h2>Sinopsis</h2>
+                                    <p><strong class="title">${titulo}</strong>${year}</p> 
                                 </div>
                                 <div class="panel__items">
                                     <h2>Personajes</h2>
