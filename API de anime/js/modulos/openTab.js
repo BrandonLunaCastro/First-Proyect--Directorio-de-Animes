@@ -2,10 +2,7 @@ export function openTab(event, section){
     let $tabContent = document.querySelectorAll(".tabContent"),
     $tabsLinks = document.querySelectorAll(".tabs-links");
 
-
-
-
-    for(let i = 0 ; i<$tabContent.length; i++){
+     for(let i = 0 ; i<$tabContent.length; i++){
         $tabContent[i].style.display = "none";
     }
 
@@ -15,7 +12,6 @@ export function openTab(event, section){
 
     document.getElementById(section).style.display = "block"
     event.currentTarget.classList.add("active")
-
 }
 
 
