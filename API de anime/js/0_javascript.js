@@ -185,14 +185,17 @@ const showAnime =  (props) =>{
 
 
         document.addEventListener("click",async e => {
-                    const $contenido =  document.querySelector(".contenido")
+                    
+                    
                 //sinopsis
                 if(e.target.matches("#sinopsis")){
-                    e.preventDefault(); 
+                    
                     const $ul = document.createElement("ul"),
                     $p = document.createElement("p");
-                    $p.textContent = "Categorias :";
-                    $contenido.innerHTML = null;
+                    $p.textContent = "Categorias :"
+
+                    let $tabcontent = document.getElementById("sinopsisContent")
+                  
                     
                     //solicitamos las categorias
                     await ajax({
@@ -207,7 +210,7 @@ const showAnime =  (props) =>{
                         }
                     })
 
-                    $contenido.innerHTML = `
+                    $tabcontent.innerHTML = `
                                     <p > <strong class="title">${titulo}</strong>${year}</p> 
                                     <p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
               
@@ -216,19 +219,24 @@ const showAnime =  (props) =>{
                     $p.classList.add("paragraph")
                     $ul.classList.add("list-categories")
 
-                    $contenido.appendChild($p)                
-                    $contenido.appendChild($ul)
-                }
+                    $tabconten.appendChild($ul)
+                    $tabconten.appendChild($p)
+                 
+            }
                 //episodios
                    
                  if(e.target.matches("#episodios")){
-                    e.preventDefault();
+                    $contenido.innerHTML ="Aqui cargaran los episodios"
+                    
                     
                  
                 }
+          
                 //personajes
                 if(e.target.matches("#personajes")){
                     e.preventDefault();
+                    location.hash = "/personajes"
+
                     document.querySelector(".contenido").innerHTML = null;
                     console.log("aqui van los personajes");
                     
@@ -242,6 +250,7 @@ const showAnime =  (props) =>{
                                 if(data.length === 0){                    
                                     $contenido.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
                                 }else {
+                                    $contenido.innerHTML = `<h3>Aqui carga la seccion de personajes</h3>`
                                      data.forEach((el)=>{ 
                                         character(el)
                                      }) 
@@ -255,18 +264,23 @@ const showAnime =  (props) =>{
 
             })
             
-
             return `
-                    <img class="banner" src="${img}">
-                    <div class="shadow"></div>
-                            <nav>
-                                <ul>
-                                  <li><a id="sinopsis" href="#/sinopsis">Sinopsis</a></li>
-                                  <li><a id="personajes" href="#/personajes">Personajes</a></li>
-                                  <li><a id="categorias" href="#/categorias">Episodios</a></li>
-                                </ul>
-                            </nav> 
-                        <div class="contenedor">
+                         <img class="banner" src="${img}">
+                         <div class="shadow"></div>
+                       
+                                <!--Tabs Links-->
+                                <div class="tab">
+                                      <button class="tabs-links" id="sinopsis" onclick="openTab(event,'sinopsis')">Sinopsis</button>
+                                      <button class="tabs-links" id="personajes" onclick="openTab(event,'personajes')">Personajes</button>
+                                      <button class="tabs-links" id="episodios" onclick="openTab(event,'capitulos')">Capitulos</button>
+                                 </div>
+
+                                <!--Tabs Content-->
+                                 <div class="tabcontent"  id="sinopsisContent" ></div>
+                                 <div class="tabcontent"  id="personajes" ></div>
+                                 <div class="tabcontent"  id="episodios" ></div>
+                     
+                       <div class="contenedor">
                             <aside class="sidebar">
                                 <img  src="${posterImage.large}" class="portada">
                                 <div class="detalles">
