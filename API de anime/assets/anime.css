@@ -8,56 +8,68 @@
 .shadow{
     position: absolute;
     top:0;
-    bottom: 159px;
+    bottom: 142px;
     width: 100%;
     background-color:rgba(0,0,0,.5) ;
 }
 
-/*Tab styles*/
-.tab{
-    overflow: hidden;
-    border:1px solid #ccc;
-    background-color: #f1f1f1;
-    /* max-height: 2.8rem; */
-    display: block;
-    margin: 0 auto;
-    flex-wrap: nowrap;
-    flex-shrink: 0;
-    width: 100%;
-  
-}
-.tab button{
-    background-color: inherit;
-    float: left;
-    border:none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-}
-.tab button:hover{
-    background-color: #ddd;
-}
-.tab button.active{
-    background-color: #ccc;
-}
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
-    background-color: red;
+/*Inicio Tab styles*/
+.tabs-container{
+    position: relative;
+    width:700px;
+    margin: 0 1em;
 }
 
+.tabs{
+   
+    list-style: none;
+    margin:0;
+    padding:0;
+    display: flex;
+    cursor: pointer;
+}
+.tabs__item{
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background-color: #fff;
+    color:#000000;
+    line-height: 2.5rem;
+    padding:0 1em;
+    border-radius:5px 5px 0 0 ;
+    position: relative;
+    top :1px
+}
+.active{
+    background: #e7e5e5;/*e7e5e5*/
+    z-index: 20;
+}
+.panels{
+    border:1px solid #ccc;
+    padding:1em;
+    position:relative;
+    background-color: #e7e5e5;
+    color: #000000;  
+}
+
+.panel__items{
+    position:absolute;
+    left: -5000px;
+
+}
+.is-active{
+    position: relative;
+    left:0;
+}
+/*Final tabs*/
 
 .position-header{
     position:  fixed;
-    /* background:none; */
+     background:none; 
 }
 
 .contenedor{
     display: flex;
-    margin: 0.5rem 30px;
+    margin: 0 30px;
     
     
 }
