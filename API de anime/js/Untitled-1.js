@@ -4,37 +4,7 @@ document.addEventListener("click",async e => {
         
 /*         console.log("funciona")
      
-        const $ul = document.createElement("ul"),
-        $p = document.createElement("p");
-        $p.textContent = "Categorias :"
 
-        let $tabcontent = document.getElementById("sinopsis");
-      
-        
-        //solicitamos las categorias
-        await ajax({
-            url:`https://kitsu.io/api/edge/anime/${id}/categories`,
-            cbSuccess:(categories)=> {
-                  let data = categories.data;
-                    data.forEach((el)=>{
-                        const $li = document.createElement("li");
-                        $li.textContent = el.attributes.title
-                        $ul.appendChild($li)
-                    })
-            }
-        })
-
-        $tabcontent.innerHTML = `
-                        <p > <strong class="title">${titulo}</strong>${year}</p> 
-                        <p class="sinopsis">${synopsis.replace( /\(Source: [a-zA-Z\s?]+\)/g , "")}</p>
-  
-                        `;
-
-        $p.classList.add("paragraph")
-        $ul.classList.add("list-categories")
-
-        $tabcontent.appendChild($ul)
-        $tabcontent.appendChild($p) */
       
 }
     //episodios
