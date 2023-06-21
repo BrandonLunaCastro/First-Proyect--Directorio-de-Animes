@@ -12,17 +12,25 @@ export async function openTab(propiedades){
     titulo = titles.en ? titles.en : titles.en_jp,
     year = new Date(startDate).getFullYear()
     
+    let $tabcontent= document.getElementById("sinopsisContent"),
+    $tabcontentPj = document.getElementById("personajesContent"),
+    $tabcontentEp = document.getElementById("episodiosContent")
+
+
     setTimeout(() => {
             document.querySelector(".defaultOpen").click();
     }, 100);
     
 
+
     document.getElementById("tabs").addEventListener("click",async e=> {
         //tab-sinopsis   
         if(e.target.matches("#sinopsis")){
-                
-                
-                let $tabcontent = document.getElementById("sinopsisContent");
+     
+                 $tabcontent.innerHTML = null
+                 $tabcontentEp.innerHTML = null
+                 $tabcontentPj.innerHTML = null
+           
                 let index = tabs.indexOf(e.target)
 
                 tabs.map(tab => tab.classList.remove("active"))
@@ -31,7 +39,7 @@ export async function openTab(propiedades){
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
             
-              // $tabcontent.innerHTML = null
+              
 
                $tabcontent.innerHTML = `<p><strong class="title">${titulo}</strong>${year}</p> `
 
@@ -64,9 +72,9 @@ export async function openTab(propiedades){
             }
             //personajes
             if(e.target.matches("#personajes")){
-              
-                let index = tabs.indexOf(e.target),
-                $tabcontentPj = document.getElementById("personajesContent")
+ 
+                $tabcontentEp.innerHTML = null
+                let index = tabs.indexOf(e.target) 
                
                 tabs.map(tab => tab.classList.remove("active"))
                 tabs[index].classList.add("active")
@@ -74,8 +82,9 @@ export async function openTab(propiedades){
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
 
-                $tabcontentPj.innerHTML = null
-                await ajax({
+               $tabcontentPj.innerHTML = null
+             
+               await ajax({
                     url:`https://kitsu.io/api/edge/anime/${id}/characters?page[limit]=20`,  //https://kitsu.io/api/edge/anime/${id}/relationships/anime-characters?page[limit]=10
                     cbSuccess:(info)=>{
                             let data = info.data
@@ -95,15 +104,16 @@ export async function openTab(propiedades){
             //episodios
             if(e.target.matches("#episodios")){
         
-                let index = tabs.indexOf(e.target),
-                $tabcontent = document.getElementById("episodiosContent")
-        
+                let index = tabs.indexOf(e.target)
+
+                $tabcontentEp.innerHTML = null
+
                 tabs.map(tab => tab.classList.remove("active"))
                 tabs[index].classList.add("active")
         
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
-
+                
 
                 await ajax({
                     url: `https://kitsu.io/api/edge/anime/${id}/episodes?page[limit]=20`,
@@ -114,7 +124,7 @@ export async function openTab(propiedades){
                          data.forEach((el) => {
                             html += episodes(el)
                          })   
-                        $tabcontent.innerHTML = html
+                        $tabcontentEp.innerHTML = html
                    }
             })   
         }
