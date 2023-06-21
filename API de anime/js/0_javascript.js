@@ -175,23 +175,23 @@ let page = Anime_api.page,
 const showAnime =  (props) =>{
         let {showType,episodeCount,status,coverImage,posterImage,titles,startDate,endDate} = props
         
-
         let img = coverImage
          ?  coverImage.original 
          : "assets/files/no-image-available.jpeg",
         titulo = titles.en ? titles.en : titles.en_jp,
         dateStart = new Date(startDate).toDateString(),
-        dateEnd = new Date(endDate).toDateString(),
-        year = new Date(startDate).getFullYear();
+        dateEnd = new Date(endDate).toDateString();
         
         setTimeout(() => {
-            openTab(props)
+            openTab(props);
         }, 100);
 
             return `
+                <div>
                     <img class="banner" src="${img}">
                     <div class="shadow"></div>
-                       <div class="contenedor">
+                </div>     
+                    <div class="contenedor">
                             <aside class="sidebar">
                                 <img  src="${posterImage.large}" class="portada">
                                 <div class="detalles">
@@ -208,15 +208,12 @@ const showAnime =  (props) =>{
                             </aside>    
                             <div class="tabs-container">
                                 <ul class="tabs" id="tabs">
-                                    <li id="sinopsis" class="tabs__item active">Sinopsis</li >
+                                    <li id="sinopsis" class="tabs__item active defaultOpen" >Sinopsis</li >
                                     <li id="personajes" class="tabs__item ">Personajes</li >
                                     <li id="episodios" class="tabs__item ">Episodios</li>
                                 </ul>
                             <div class="panels">
-                                <div class="panel__items is-active" id="sinopsisContent">
-                                    <h2>Sinopsis</h2>
-                                    <p><strong class="title">${titulo}</strong>${year}</p> 
-                                </div>
+                                <div class="panel__items is-active" id="sinopsisContent"></div>
                                 <div class="panel__items">
                                     <h2>Personajes</h2>
                                 </div>
@@ -224,10 +221,7 @@ const showAnime =  (props) =>{
                                     <h2>Episodios</h2>
                                 </div>
                             </div>
-                        </div>
-
-               
-                       
+                        </div>                       
             `;
     
   
