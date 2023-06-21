@@ -87,17 +87,16 @@ export async function openTab(propiedades){
                                  data.forEach((el)=>{ 
                                     character(el)
                                  }) 
-                            }
-        
-                                  
-                        }
+                            }        
+                    }
                 })
             
             }
             //episodios
             if(e.target.matches("#episodios")){
         
-                let index = tabs.indexOf(e.target)
+                let index = tabs.indexOf(e.target),
+                $tabcontent = document.getElementById("episodiosContent")
         
                 tabs.map(tab => tab.classList.remove("active"))
                 tabs[index].classList.add("active")
@@ -110,16 +109,15 @@ export async function openTab(propiedades){
                     url: `https://kitsu.io/api/edge/anime/${id}/episodes?page[limit]=20`,
                     cbSuccess:(episodios)=>{
                          console.log(episodios)
-                         let data = episodios.data
-                          data.forEach((el) => {
-                            episodes(el)
-                    
+                         let data = episodios.data,
+                         html = ""
+                         data.forEach((el) => {
+                            html += episodes(el)
                          })   
+                        $tabcontent.innerHTML = html
                    }
-                })
-
-        
-            }
+            })   
+        }
     })           
 
 }
