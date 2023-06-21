@@ -61,6 +61,17 @@
     position: relative;
     left:0;
 }
+
+#personajesContent{
+    display: flex; 
+    flex-wrap: wrap;
+    width: 100%;
+    color: #000000;
+    margin: 0.5rem 0 ;
+}
+
+
+
 /*Final tabs*/
 
 .position-header{
@@ -71,8 +82,6 @@
 .contenedor{
     display: flex;
     margin: 0 30px;
-    
-    
 }
 
 .sidebar{
@@ -95,7 +104,6 @@
 .detalles{
     display: flex;
     flex-wrap: wrap;
-
 }
 
 .detalles ul{
@@ -113,11 +121,16 @@
     max-width: 173px;
     background-color: rgba(255, 255, 255);
     color: black;
-    height: 130px;
+    height: 118px;
     text-align: center;
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     border: 2px solid rgb(128, 128, 128);
     margin: 5px;
+}
+.character figcaption{
+    display: inherit;
+    justify-content: center;
+    align-items: center;
 }
 
 .character img{
@@ -127,16 +140,7 @@
 
 }
 
-     .contenido{
-        display: flex; 
-        flex-wrap: wrap;
-        width: 100%;
-        color: #000000;
-        margin: 2rem 0 ;
-    }
-    .contenido p{
-        margin-left: 2rem;
-    }
+   
     
     .title{
         font-size: 1.5rem;
