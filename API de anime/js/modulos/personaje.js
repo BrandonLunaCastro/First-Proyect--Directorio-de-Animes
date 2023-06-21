@@ -14,7 +14,7 @@ export function personaje(props){
 
     $img.setAttribute("src",`${imagen}`);
     $img.alt = canonicalName;
-    $figcaption.textContent = canonicalName;
+    $figcaption.textContent = canonicalName.length > 15 ?canonicalName.slice(0,15)+"..." : canonicalName
 
     return $figure;
 }
