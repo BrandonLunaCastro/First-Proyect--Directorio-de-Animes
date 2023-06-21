@@ -2,7 +2,7 @@ export default function episodes(props){
     //console.log(props.attributes)
     let {canonicalTitle,thumbnail,number} = props.attributes,
     img = thumbnail ? thumbnail.original : "assets/files/no-image-available.jpeg",
-    titulo = canonicalTitle.slice(0,20)+"...";
+    titulo =  canonicalTitle.length > 20 ? canonicalTitle.slice(0,20)+"..." : canonicalTitle;
    
     return `
     <article class="container-episodes">
