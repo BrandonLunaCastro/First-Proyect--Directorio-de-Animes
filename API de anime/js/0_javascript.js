@@ -214,10 +214,8 @@ const showAnime =  (props) =>{
                                 </ul>
                             <div class="panels">
                                 <div class="panel__items is-active" id="sinopsisContent"></div>
-                                <div class="panel__items">
-                                    <h2>Personajes</h2>
-                                </div>
-                                <div class="panel__items">
+                                <div class="panel__items" id="personajesContent"></div>
+                                <div class="panel__items" id="episodiosContent">
                                     <h2>Episodios</h2>
                                 </div>
                             </div>
