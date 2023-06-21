@@ -5,14 +5,19 @@ export async function openTab(propiedades){
     let tabs = Array.from(document.querySelectorAll(".tabs__item")),
     panels = Array.from(document.querySelectorAll(".panel__items")),
     id = localStorage.getItem("PostId"),
-    {title,synopsis} = propiedades
+    {titles,synopsis,startDate} = propiedades,
+    titulo = titles.en ? titles.en : titles.en_jp,
+    year = new Date(startDate).getFullYear()
     
-  
+    setTimeout(() => {
+            document.querySelector(".defaultOpen").click();
+    }, 100);
     
+
     document.getElementById("tabs").addEventListener("click",async e=> {
         //tab-sinopsis   
         if(e.target.matches("#sinopsis")){
-                location.hash = "/sinopsis"
+                
                 
                 let $tabcontent = document.getElementById("sinopsisContent");
                 let index = tabs.indexOf(e.target)
@@ -23,7 +28,9 @@ export async function openTab(propiedades){
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
             
-               //$tabcontent.innerHTML = null
+              // $tabcontent.innerHTML = null
+
+               $tabcontent.innerHTML = `<p><strong class="title">${titulo}</strong>${year}</p> `
 
                 const $ul = document.createElement("ul"),
                 $p = document.createElement("p");
@@ -53,7 +60,7 @@ export async function openTab(propiedades){
 
             }
             if(e.target.matches("#personajes")){
-               
+              
                 let index = tabs.indexOf(e.target)
                
                 tabs.map(tab => tab.classList.remove("active"))
@@ -61,6 +68,8 @@ export async function openTab(propiedades){
             
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
+
+
             }
             if(e.target.matches("#episodios")){
         
