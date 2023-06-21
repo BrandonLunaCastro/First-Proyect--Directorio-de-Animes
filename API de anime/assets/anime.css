@@ -1,22 +1,23 @@
 .banner{
-    height: 450px;
+    height: 500px;
     width: 100%;
-    max-width: 100%;
     top: 0;
     object-fit: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .shadow{
     position: absolute;
-    top:0;
-    bottom: 142px;
+    top: 0;
+    height: 500px;
     width: 100%;
     background-color:rgba(0,0,0,.5) ;
-}
+} 
 
 /*Inicio Tab styles*/
 .tabs-container{
     position: relative;
-    width:700px;
+    width:100%;
     margin: 0 1em;
 }
 
@@ -53,7 +54,7 @@
 
 .panel__items{
     position:absolute;
-    left: -5000px;
+    left: -50000px;
 
 }
 .is-active{
@@ -75,7 +76,7 @@
 }
 
 .sidebar{
-    background-color: rgba(0, 0, 0, 0.74);
+    background-color: rgba(5, 1, 1, 0.90);
     display: flex;
     padding-top: 0.5rem;
     flex-direction: column;
@@ -126,39 +127,9 @@
 
 }
 
-/* 
-    nav{
- 
-        width: 100%;
-        padding:0 0.5%;
-        height: 100px;
-        padding: 1rem;
-        margin-bottom: 50%; *  HACER CON MEDIAS QUERYS 
-    }
-    nav ul{
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 1rem;
-        justify-content: center;
-        list-style-type: none;
-        padding-left: 1rem;
-        color:#ffffff;
-        cursor: pointer;
-    
-    }
-    ul a{
-        display: inherit;
-        color: #ffffff;
-        text-decoration: none;
-        padding: 1rem;
-        border: 1px solid white;
-        background-color: rgba(0, 0, 0, .75);
-    } */
-
      .contenido{
         display: flex; 
         flex-wrap: wrap;
-        /* flex-direction: column; */
         width: 100%;
         color: #000000;
         margin: 2rem 0 ;
@@ -176,7 +147,7 @@
     }
 
     .detalles h3{
-        margin:0.5rem auto ;
+        margin:0.5rem 1rem ;
     }
     h3{
         width: 100%;
