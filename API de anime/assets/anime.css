@@ -1,15 +1,13 @@
 .banner{
-    height: 500px;
-    width: 100%;
-    top: 0;
-    object-fit: cover;
-    background-repeat: no-repeat;
-    background-size: cover;
+ height: 480px;
+ width: 100%;
+ top: 0;  
+ object-fit: cover;   
 }
 .shadow{
     position: absolute;
     top: 0;
-    height: 500px;
+    height: 480px;
     width: 100%;
     background-color:rgba(0,0,0,.5) ;
 } 
@@ -114,6 +112,7 @@
     list-style-type: none;
 }
 
+/*Personajes*/
 .character{
     display: flex;
     flex-direction: column;
@@ -140,7 +139,37 @@
 
 }
 
-   
+  /*Episodios*/
+  #episodiosContent{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin:1rem 2rem;
+  }
+  .container-episodes{
+    display: flex;
+    background-color: #FFF;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    transition: all 1s ease;
+    padding: 0.2rem 0.8rem;
+  }
+/*   .container-episodes:hover{
+    transform: scale(1);
+    cursor: pointer;
+  } */
+  .container-episodes img{
+    display: block;    
+    margin:  auto;
+    margin-top:10px;
+    height:170px ;
+    width: 233px;
+    object-fit: cover;
+}
+.container-episodes p{
+    font-size: 0.8rem;
+}
     
     .title{
         font-size: 1.5rem;
