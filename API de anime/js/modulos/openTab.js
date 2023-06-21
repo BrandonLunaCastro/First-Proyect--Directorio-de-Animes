@@ -1,4 +1,7 @@
+import character from "./Characters.js";
 import ajax from "./ajax.js"
+import episodes from "./episodios.js";
+
 
 export async function openTab(propiedades){
 
@@ -59,9 +62,11 @@ export async function openTab(propiedades){
                 $tabcontent.appendChild($ul);
 
             }
+            //personajes
             if(e.target.matches("#personajes")){
               
-                let index = tabs.indexOf(e.target)
+                let index = tabs.indexOf(e.target),
+                $tabcontentPj = document.getElementById("personajesContent")
                
                 tabs.map(tab => tab.classList.remove("active"))
                 tabs[index].classList.add("active")
@@ -69,8 +74,27 @@ export async function openTab(propiedades){
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
 
-
+                $tabcontentPj.innerHTML = null
+                await ajax({
+                    url:`https://kitsu.io/api/edge/anime/${id}/characters?page[limit]=20`,  //https://kitsu.io/api/edge/anime/${id}/relationships/anime-characters?page[limit]=10
+                    cbSuccess:(info)=>{
+                            let data = info.data
+                            console.log(data)
+                            if(data.length === 0){                    
+                                $tabcontentPj.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
+                            }else {
+                                $tabcontentPj.innerHTML = `<h3>Aqui carga la seccion de personajes</h3>`
+                                 data.forEach((el)=>{ 
+                                    character(el)
+                                 }) 
+                            }
+        
+                                  
+                        }
+                })
+            
             }
+            //episodios
             if(e.target.matches("#episodios")){
         
                 let index = tabs.indexOf(e.target)
@@ -80,6 +104,20 @@ export async function openTab(propiedades){
         
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
+
+
+                await ajax({
+                    url: `https://kitsu.io/api/edge/anime/${id}/episodes?page[limit]=20`,
+                    cbSuccess:(episodios)=>{
+                         console.log(episodios)
+                         let data = episodios.data
+                          data.forEach((el) => {
+                            episodes(el)
+                    
+                         })   
+                   }
+                })
+
         
             }
     })           
