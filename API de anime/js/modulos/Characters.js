@@ -3,14 +3,14 @@ import { personaje } from "./personaje.js";
 
 export default   function  character(elements){
         let {id} = elements,
-        $contenido = document.querySelector(".contenido")
+        $tabcontent = document.getElementById("personajesContent")
+
         ajax({
             url:`https://kitsu.io/api/edge/media-characters/${id}/character`,
             cbSuccess:(persona)=>{
                 let data = persona.data
-                console.log(data)
                 const targeta = personaje(data.attributes)
-                $contenido.appendChild(targeta)
+                $tabcontent.appendChild(targeta)
             }
         })
         
