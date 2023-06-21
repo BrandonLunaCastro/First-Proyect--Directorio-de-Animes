@@ -120,12 +120,18 @@
     max-width: 173px;
     background-color: rgba(255, 255, 255);
     color: black;
-    height: 118px;
+    height: 188px;
     text-align: center;
-    font-size: 0.5rem;
+    font-size: 0.9rem;
     border: 2px solid rgb(128, 128, 128);
     margin: 5px;
+    box-shadow: 0px 3px 2px rgba(0,0,0,0.85);
 }
+.character:hover{
+    cursor: pointer;
+    background-color: #edeaea;
+    
+} 
 .character figcaption{
     display: inherit;
     justify-content: center;
@@ -133,8 +139,8 @@
 }
 
 .character img{
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
 
 }
@@ -151,14 +157,16 @@
     background-color: #FFF;
     flex-direction: column;
     align-items: center;
-    border: 1px solid black;
-    transition: all 1s ease;
+    border-radius: 5px;
+    transition: 0.5s;
     padding: 0.2rem 0.8rem;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.85);
+
   }
-/*   .container-episodes:hover{
-    transform: scale(1);
+   .container-episodes:hover{
+    transform: scale(1.1);
     cursor: pointer;
-  } */
+  } 
   .container-episodes img{
     display: block;    
     margin:  auto;
