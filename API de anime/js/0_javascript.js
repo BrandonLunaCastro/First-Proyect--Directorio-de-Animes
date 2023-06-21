@@ -187,10 +187,10 @@ const showAnime =  (props) =>{
         }, 100);
 
             return `
-                <div>
+             
                     <img class="banner" src="${img}">
                     <div class="shadow"></div>
-                </div>     
+                
                     <div class="contenedor">
                             <aside class="sidebar">
                                 <img  src="${posterImage.large}" class="portada">
