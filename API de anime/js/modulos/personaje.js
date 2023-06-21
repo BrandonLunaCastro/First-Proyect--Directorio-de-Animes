@@ -17,6 +17,4 @@ export function personaje(props){
     $figcaption.textContent = canonicalName;
 
     return $figure;
-
-    
 }
