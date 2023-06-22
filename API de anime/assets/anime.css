@@ -65,7 +65,7 @@
     flex-wrap: wrap;
     width: 100%;
     color: #000000;
-    margin: 0.5rem 0 ;
+    margin: 0.5rem 2rem ;
 }
 
 
@@ -91,11 +91,12 @@
     align-items: center;
     width: 15rem;
     max-height: 540px;
-    max-width: 200px;
+    max-width: 210px;
     margin: 0.5rem auto;
 }
 .portada{
-    width: 195px;
+    margin-top: 0;
+    max-width: 195px;
 }
 
 
@@ -110,6 +111,7 @@
     padding: 0;
     margin: 1rem;
     list-style-type: none;
+    font-size: 13px;
 }
 
 /*Personajes*/
@@ -217,7 +219,7 @@
 
     .list-categories{
         margin-top: 5px;
-        list-style-type: "✔" ;
+        list-style-type: "-" ;
     }
 
 
@@ -227,4 +229,8 @@
             display: inherit;
             flex-wrap:wrap ;
         }
+        #personajesContent{
+            margin: 0.5rem 4rem;
+        }
+
 }
