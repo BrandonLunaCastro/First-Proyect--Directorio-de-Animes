@@ -1,3 +1,4 @@
+import Anime_api from "./Anime_api.js";
 import character from "./Characters.js";
 import ajax from "./ajax.js"
 import episodes from "./episodios.js";
@@ -17,7 +18,7 @@ export async function openTab(propiedades){
     $tabcontentPj = document.getElementById("personajesContent"),
     $tabcontentEp = document.getElementById("episodiosContent")
  
-
+ 
 
   setTimeout(() => {
     document.getElementById("sinopsis").click();    
@@ -102,11 +103,13 @@ export async function openTab(propiedades){
                             }        
                     }
                 })
-                infiniteScroll();
+             
             }
             //episodios
             if(e.target.matches("#episodios")){
                 history.pushState(null,null,"#/episodios")
+                Anime_api.page = 0
+
                 let index = tabs.indexOf(e.target)
 
                 $tabcontentEp.innerHTML = null
@@ -130,7 +133,8 @@ export async function openTab(propiedades){
                         $tabcontentEp.innerHTML = html
                    }
             })   
-            infiniteScroll();
+           
+            
         }
     })           
 
