@@ -241,6 +241,7 @@ const showAnime =  (props) =>{
             Anime_api.page = 0
             Anime_api.number_page = 0
             peticion();
+            
 
   
    })
