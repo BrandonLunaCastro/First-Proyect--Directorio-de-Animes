@@ -15,21 +15,22 @@ export async function openTab(propiedades){
     let $tabcontent= document.getElementById("sinopsisContent"),
     $tabcontentPj = document.getElementById("personajesContent"),
     $tabcontentEp = document.getElementById("episodiosContent")
+ 
 
 
-    setTimeout(() => {
-            document.querySelector(".defaultOpen").click();
-    }, 100);
+  setTimeout(() => {
+    document.getElementById("sinopsis").click();    
+  }, 100);
     
-
-
     document.getElementById("tabs").addEventListener("click",async e=> {
         //tab-sinopsis   
         if(e.target.matches("#sinopsis")){
-     
+                
+                history.pushState(null,null,"#/sinopsis")
+
                  $tabcontent.innerHTML = null
                  $tabcontentEp.innerHTML = null
-                 $tabcontentPj.innerHTML = null
+                 $tabcontentPj.innerHTML = null 
            
                 let index = tabs.indexOf(e.target)
 
@@ -39,7 +40,7 @@ export async function openTab(propiedades){
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
             
-              
+               console.log(location.hash)  
 
                $tabcontent.innerHTML = `<p><strong class="title">${titulo}</strong>${year}</p> `
 
@@ -72,7 +73,8 @@ export async function openTab(propiedades){
             }
             //personajes
             if(e.target.matches("#personajes")){
- 
+
+                history.pushState(null,null,"#/personajes")
                 $tabcontentEp.innerHTML = null
                 let index = tabs.indexOf(e.target) 
                
@@ -81,7 +83,7 @@ export async function openTab(propiedades){
             
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
-
+                console.log(location.hash)
                $tabcontentPj.innerHTML = null
              
                await ajax({
@@ -103,7 +105,7 @@ export async function openTab(propiedades){
             }
             //episodios
             if(e.target.matches("#episodios")){
-        
+                history.pushState(null,null,"#/episodios")
                 let index = tabs.indexOf(e.target)
 
                 $tabcontentEp.innerHTML = null
@@ -113,7 +115,7 @@ export async function openTab(propiedades){
         
                 panels.map(panel => panel.classList.remove("is-active"))
                 panels[index].classList.add("is-active")
-                
+                console.log(location.hash)
 
                 await ajax({
                     url: `https://kitsu.io/api/edge/anime/${id}/episodes?page[limit]=20`,
