@@ -2,6 +2,7 @@ import Anime_api from "./modulos/Anime_api.js"
 import character from "./modulos/Characters.js";
 import { posts } from "./modulos/Post_home.js"
 import ajax from "./modulos/ajax.js"
+import { infiniteScroll } from "./modulos/infiniteScroll.js";
 import { openTab } from "./modulos/openTab.js";
 
 
@@ -241,7 +242,7 @@ const showAnime =  (props) =>{
             Anime_api.page = 0
             Anime_api.number_page = 0
             peticion();
-            
+            infiniteScroll()
 
   
    })
