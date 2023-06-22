@@ -75,9 +75,12 @@ export async function openTab(propiedades){
             }
             //personajes
             if(e.target.matches("#personajes")){
-
+                
                 history.pushState(null,null,"#/personajes")
+                Anime_api.page = 0
+                
                 $tabcontentEp.innerHTML = null
+                
                 let index = tabs.indexOf(e.target) 
                
                 tabs.map(tab => tab.classList.remove("active"))
@@ -93,7 +96,8 @@ export async function openTab(propiedades){
                     cbSuccess:(info)=>{
                             let data = info.data
                             console.log(data)
-                            if(data.length === 0){                    
+                            if(data.length === 0|| data === null){     
+                                console.log(data)               
                                 $tabcontentPj.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
                             }else {
                                 $tabcontentPj.innerHTML = `<h3>Aqui carga la seccion de personajes</h3>`
@@ -103,7 +107,7 @@ export async function openTab(propiedades){
                             }        
                     }
                 })
-             
+           
             }
             //episodios
             if(e.target.matches("#episodios")){
@@ -124,16 +128,21 @@ export async function openTab(propiedades){
                 await ajax({
                     url: `https://kitsu.io/api/edge/anime/${id}/episodes?page[limit]=20`,
                     cbSuccess:(episodios)=>{
-                         console.log(episodios)
                          let data = episodios.data,
                          html = ""
-                         data.forEach((el) => {
-                            html += episodes(el)
-                         })   
-                        $tabcontentEp.innerHTML = html
+                        console.log(data)
+                        if(data.length === 1){
+                            $tabcontentEp.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
+                        }else{
+                            data.forEach((el) => {
+                                html += episodes(el)
+                             })   
+                            $tabcontentEp.innerHTML = html
+                        }
+                        
                    }
             })   
-           
+                
             
         }
     })           
