@@ -185,6 +185,7 @@ const showAnime =  (props) =>{
         
         setTimeout(() => {
             openTab(props);
+            infiniteScroll();
         }, 100);
 
             return `
@@ -242,7 +243,7 @@ const showAnime =  (props) =>{
             Anime_api.page = 0
             Anime_api.number_page = 0
             peticion();
-            infiniteScroll()
+            
 
   
    })
