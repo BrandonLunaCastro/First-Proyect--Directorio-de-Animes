@@ -1,4 +1,5 @@
 import Anime_api from "./Anime_api.js";
+import character from "./Characters.js";
 import ajax from "./ajax.js";
 import episodes from "./episodios.js";
 
@@ -17,19 +18,30 @@ export async function infiniteScroll(){
            Anime_api.page+=20
         
          if(location.hash === "#/personajes"){    
+            console.log("entro en personajes")
             direccionURL = `https://kitsu.io/api/edge/anime/${id}/characters?page[limit]=20&page[offset]=${Anime_api.page}`
-            contenido = function showPersonaje(){
-
+            contenido = function showPersonaje(info){
+                info = info.data
+                console.log(info,"aqui se ve que trae")
+                 if(info === null){                    
+                    //$tabcontentPj.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
+                    return false;
+                }else {
+                     info.forEach((el)=>{ 
+                        character(el)
+                     }) 
+                }         
             }
-        }else if(location.hash === "#/episodios"){
-            
+        } 
+        if(location.hash === "#/episodios"){
+            console.log("entro en episodios")
             direccionURL = `https://kitsu.io/api/edge/anime/${id}/episodes?page[limit]=20&page[offset]=${Anime_api.page}`
             contenido = function showEpisodios(info){
                          info = info.data
                         let html = ""
                         console.log(info)
                         if(info.length === 0){
-                            return false;
+                            return;
                         }else{
                             info.forEach((el) => {
                                 html += episodes(el)
@@ -39,14 +51,16 @@ export async function infiniteScroll(){
                          
         }
 
-        document.querySelector(".loader").style.display = "block;"
-
+        document.querySelector(".loader").style.display = "block"
+            
             await ajax({
                 url: direccionURL,
                 cbSuccess:(data) => {
-                    contenido(data)
+                   contenido(data)
                 }
             })
+        
+            document.querySelector(".loader").style.display = "none";
         }
       }
     })
