@@ -1,6 +1,7 @@
 import character from "./Characters.js";
 import ajax from "./ajax.js"
 import episodes from "./episodios.js";
+import { infiniteScroll } from "./infiniteScroll.js";
 
 
 export async function openTab(propiedades){
@@ -101,7 +102,7 @@ export async function openTab(propiedades){
                             }        
                     }
                 })
-            
+                infiniteScroll();
             }
             //episodios
             if(e.target.matches("#episodios")){
@@ -129,6 +130,7 @@ export async function openTab(propiedades){
                         $tabcontentEp.innerHTML = html
                    }
             })   
+            infiniteScroll();
         }
     })           
 
