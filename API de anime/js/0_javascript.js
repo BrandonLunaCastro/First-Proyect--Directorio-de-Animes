@@ -185,8 +185,9 @@ const showAnime =  (props) =>{
         
         setTimeout(() => {
             openTab(props);
-            infiniteScroll();
+       
         }, 100);
+        infiniteScroll();
 
             return `
              
