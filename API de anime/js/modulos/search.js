@@ -22,7 +22,7 @@ export  function search(){
 
     document.addEventListener("search",  e => {
   
-        if(!e.target.matches(`input[type="search"]`))console.log("No anda el search");
+        if(!e.target.matches(`input[type="search"]`))return false;
         if(!e.target.value)localStorage.removeItem("searchId")
     
     });
