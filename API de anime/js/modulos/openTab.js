@@ -2,7 +2,7 @@ import Anime_api from "./Anime_api.js";
 import character from "./Characters.js";
 import ajax from "./ajax.js"
 import episodes from "./episodios.js";
-import { infiniteScroll } from "./infiniteScroll.js";
+
 
 
 export async function openTab(propiedades){
@@ -96,7 +96,7 @@ export async function openTab(propiedades){
                     cbSuccess:(info)=>{
                             let data = info.data
                             console.log(data)
-                            if(data.length === 0|| data === null){     
+                            if(data.length === 0){     
                                 console.log(data)               
                                 $tabcontentPj.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
                             }else {
@@ -117,6 +117,7 @@ export async function openTab(propiedades){
                 let index = tabs.indexOf(e.target)
 
                 $tabcontentEp.innerHTML = null
+                $tabcontentPj.innerHTML = null
 
                 tabs.map(tab => tab.classList.remove("active"))
                 tabs[index].classList.add("active")
