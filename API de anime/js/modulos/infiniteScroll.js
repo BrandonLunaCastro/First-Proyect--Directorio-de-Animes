@@ -21,16 +21,16 @@ export async function infiniteScroll(){
             console.log("entro en personajes")
             direccionURL = `https://kitsu.io/api/edge/anime/${id}/characters?page[limit]=20&page[offset]=${Anime_api.page}`
             contenido = function showPersonaje(info){
-                info = info.data
+                info = info.data 
                 console.log(info,"aqui se ve que trae")
-                 if(info === null){                    
-                    //$tabcontentPj.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
+                if(info.length === 0){                    
+                    $tabcontentPj.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
                     return false;
                 }else {
                      info.forEach((el)=>{ 
                         character(el)
                      }) 
-                }         
+                }          
             }
         } 
         if(location.hash === "#/episodios"){
@@ -41,7 +41,8 @@ export async function infiniteScroll(){
                         let html = ""
                         console.log(info)
                         if(info.length === 0){
-                            return;
+                            console.log("vacio")
+                            return false;
                         }else{
                             info.forEach((el) => {
                                 html += episodes(el)
@@ -50,18 +51,18 @@ export async function infiniteScroll(){
                         }
                          
         }
+        }
 
         document.querySelector(".loader").style.display = "block"
             
-            await ajax({
-                url: direccionURL,
-                cbSuccess:(data) => {
-                   contenido(data)
-                }
-            })
-        
-            document.querySelector(".loader").style.display = "none";
-        }
+        await ajax({
+            url: direccionURL,
+            cbSuccess:(data) => {
+               contenido(data)
+            }
+        })
+    
+        document.querySelector(".loader").style.display = "none";
       }
     })
 }
