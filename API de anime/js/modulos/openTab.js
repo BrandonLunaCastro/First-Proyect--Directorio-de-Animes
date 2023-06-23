@@ -2,6 +2,7 @@ import Anime_api from "./Anime_api.js";
 import character from "./Characters.js";
 import ajax from "./ajax.js"
 import episodes from "./episodios.js";
+import { infiniteScroll } from "./infiniteScroll.js";
 
 
 
@@ -18,7 +19,7 @@ export async function openTab(propiedades){
     $tabcontentPj = document.getElementById("personajesContent"),
     $tabcontentEp = document.getElementById("episodiosContent")
  
- 
+    infiniteScroll();
 
   setTimeout(() => {
     document.getElementById("sinopsis").click();    
@@ -107,7 +108,7 @@ export async function openTab(propiedades){
                             }        
                     }
                 })
-           
+              
             }
             //episodios
             if(e.target.matches("#episodios")){
@@ -143,7 +144,7 @@ export async function openTab(propiedades){
                         
                    }
             })   
-                
+         
             
         }
     })           
