@@ -100,6 +100,7 @@ export async function openTab(propiedades){
                             if(data.length === 0){     
                                 console.log(data)               
                                 $tabcontentPj.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
+                                document.querySelector(".loader").style.display = "none"
                             }else {
                                 $tabcontentPj.innerHTML = `<h3>Aqui carga la seccion de personajes</h3>`
                                  data.forEach((el)=>{ 
@@ -133,7 +134,7 @@ export async function openTab(propiedades){
                          let data = episodios.data,
                          html = ""
                         console.log(data)
-                        if(data.length === 1){
+                        if(data.length === 0 ){
                             $tabcontentEp.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
                         }else{
                             data.forEach((el) => {
