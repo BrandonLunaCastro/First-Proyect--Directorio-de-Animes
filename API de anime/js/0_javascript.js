@@ -195,11 +195,9 @@ const showAnime =  (props) =>{
         }, 100);
 
      
-            return `
-             
+            return `          
                     <img class="banner" src="${img}">
-                    <div class="shadow"></div>
-                
+                    <div class="shadow"></div>                
                     <div class="contenedor">
                             <aside class="sidebar">
                                 <img  src="${posterImage.large}" class="portada">
@@ -230,8 +228,6 @@ const showAnime =  (props) =>{
                             </div>
                         </div>                       
             `;
-    
-  
         }
 ////Cargas al DOM////
     document.addEventListener("DOMContentLoaded",e => {
