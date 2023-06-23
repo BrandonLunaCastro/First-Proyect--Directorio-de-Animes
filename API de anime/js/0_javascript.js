@@ -8,12 +8,13 @@ import { openTab } from "./modulos/openTab.js";
 
 let page = Anime_api.page,
      pagina = Anime_api.number_page,
-     ApiURL;
+     ApiURL,
+     query = localStorage.getItem("query")
         
 //////Funciones//////
 
 
-    //<---FUNCION PETICION--->
+    //<---FUNCION DE ENRUTAMIENTO--->
     const peticion = async () => { 
     document.querySelector(".btns").style.display = "flex"
     const $main = document.querySelector("main"),
@@ -47,7 +48,6 @@ let page = Anime_api.page,
 
            getAnimes(page,ApiURL)
     }else{
-        $main.innerHTML =  ` <h1>Aqui cargara al anime seleccionado</h1>`;
         
         document.querySelector("header").classList.add("position-header");
         document.querySelector(".btns").style.display = "none";  
@@ -138,12 +138,18 @@ let page = Anime_api.page,
                 let data = animes.data,
                 html = "";
                 console.log(data)
-                data.forEach(el => {
+                if(data.length === 0){
+                    document.querySelector("main").innerHTML = `<p class="error">No se encontraron coincidencias con tu búsqueda:  <mark>${query}</mark></p>`
+                }else{
+              
+                    data.forEach(el => {
                         html += posts(el.attributes,el.id);
-                });
-                
+                    });
                 document.querySelector("main").innerHTML = html
               
+                }
+
+                
             }
         })
     };
@@ -187,8 +193,8 @@ const showAnime =  (props) =>{
             openTab(props);
        
         }, 100);
-        infiniteScroll();
 
+     
             return `
              
                     <img class="banner" src="${img}">
@@ -227,8 +233,6 @@ const showAnime =  (props) =>{
     
   
         }
-
-///https://kitsu.io/api/edge/anime/1555/anime-characters ruta que sirve para los characters 
 ////Cargas al DOM////
     document.addEventListener("DOMContentLoaded",e => {
             document.querySelector("main").innerHTML = null    
@@ -244,8 +248,6 @@ const showAnime =  (props) =>{
             Anime_api.page = 0
             Anime_api.number_page = 0
             peticion();
-            
-
-  
+ 
    })
 
