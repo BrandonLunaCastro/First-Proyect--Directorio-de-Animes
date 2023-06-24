@@ -13,7 +13,8 @@ export async function infiniteScroll(){
         id = localStorage.getItem("PostId"),
         $tabcontentPj = document.getElementById("personajesContent"),
         $tabcontentEp = document.getElementById("episodiosContent"),
-        $loader = document.querySelector(".loader");
+        $loader = document.querySelector(".loader"),
+        estado = true
 
        console.log(scrollHeight)
        
@@ -22,31 +23,28 @@ export async function infiniteScroll(){
             Anime_api.page+=20
             
          if(location.hash === "#/personajes"){    
-            
             direccionURL = `https://kitsu.io/api/edge/anime/${id}/characters?page[limit]=20&page[offset]=${Anime_api.page}`
             contenido = function showPersonaje(info){
                 info = info.data 
-            
+                console.log(info)
                 if(info.length === 0){                    
-                 //$tabcontentPj.insertAdjacentHTML("beforeend",`<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`)                   
-                    return false;
+                    estado = false;
                 }else {
-                    $loader.style.display = "block";
-
                      info.forEach((el)=>{ 
-                     character(el)
+                      character(el);
                      }); 
                 }          
             }
-        }else if(location.hash === "#/episodios"){           
-           
+        }
+         
+        if(location.hash === "#/episodios"){                 
             direccionURL = `https://kitsu.io/api/edge/anime/${id}/episodes?page[limit]=20&page[offset]=${Anime_api.page}`
             contenido = function showEpisodios(info){
                          info = info.data
                         let html = ""
                         console.log(info)
                         if(info.length === 0){                                         
-                            return false;
+                                estado = false;
                         }else{                 
                             info.forEach((el) => {
                                 html += episodes(el)
@@ -54,25 +52,30 @@ export async function infiniteScroll(){
                             $tabcontentEp.insertAdjacentHTML("beforeend",html)
                         }}
             }else {
-                $loader.style.display = "none";
             $tabcontentEp.innerHTML = null
             $tabcontentPj.innerHTML = null
-            return false;
+            estado = false;
         }
-
-        
-        await ajax({
-            url: direccionURL,
-            cbSuccess:(data) => {
-               contenido(data)    
-               
+            console.log(estado)
+            
+            if(estado !==false ){
+                $loader.style.display="block";
+                await ajax({
+                    url: direccionURL,
+                    cbSuccess:(data) => {
+                       contenido(data)    
+                       $loader.style.display="none";
+                    }
+                })             
+            }else{
+                $loader.style.display="block";   
             }
-        })
-        $loader.style.display="none";
-        if(contenido === false){
-            return false;
+   
+       
+    
         }
         
-      }
+     
+
     })
 }
