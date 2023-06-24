@@ -5,8 +5,8 @@ export function personaje(props){
     let $figure = document.createElement("figure"),
     $img = document.createElement("img"),
     $figcaption = document.createElement("figcaption"),
-    imagen = image ? image.original : "assets/files/no-image-available.jpeg"
-
+    imagen = image ? image.original : "assets/files/no-image-available.jpeg",
+    $fragment = document.createDocumentFragment();
 
     $figure.appendChild($img)
     $figure.appendChild($figcaption)
@@ -15,6 +15,9 @@ export function personaje(props){
     $img.setAttribute("src",`${imagen}`);
     $img.alt = canonicalName;
     $figcaption.textContent = canonicalName.length > 15 ?canonicalName.slice(0,15)+"..." : canonicalName
+    $fragment.appendChild($figure)
 
-    return $figure;
+    let clone = document.importNode($fragment,true)
+    console.log(clone)
+    return clone;
 }
