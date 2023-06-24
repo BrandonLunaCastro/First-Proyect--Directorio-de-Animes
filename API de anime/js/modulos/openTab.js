@@ -96,10 +96,9 @@ export async function openTab(propiedades){
                     cbSuccess:(info)=>{
                             let data = info.data
                             console.log(data)
-                            if(data.length === 0){     
-                                console.log(data)               
+                            if(data.length === 0){                 
                                 $tabcontentPj.innerHTML = `<p class="vacio">Ups parece que aún no hay nada cargado aqui  ¯\_(ツ)_/¯</p>`
-                                document.querySelector(".loader").style.display = "none"
+                                
                             }else {
                                 $tabcontentPj.innerHTML = `<h3>Aqui carga la seccion de personajes</h3>`
                                  data.forEach((el)=>{ 
@@ -148,7 +147,7 @@ export async function openTab(propiedades){
 
         }
     })           
-            infiniteScroll();
+           infiniteScroll();
 
 }
 
