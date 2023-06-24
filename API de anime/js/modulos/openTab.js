@@ -19,8 +19,7 @@ export async function openTab(propiedades){
     $tabcontentPj = document.getElementById("personajesContent"),
     $tabcontentEp = document.getElementById("episodiosContent")
  
-    infiniteScroll();
-
+    
   setTimeout(() => {
     document.getElementById("sinopsis").click();    
   }, 100);
@@ -145,10 +144,11 @@ export async function openTab(propiedades){
                         
                    }
             })   
-         
             
+
         }
     })           
+            infiniteScroll();
 
 }
 
