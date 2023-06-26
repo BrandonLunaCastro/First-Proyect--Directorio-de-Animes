@@ -15,14 +15,7 @@ export async function infiniteScroll(url){
     window.addEventListener("scroll", async e => {
    
         let {scrollTop,scrollHeight,clientHeight} = document.documentElement
-        console.log(scrollTop)
-              
-        if(scrollTop > 100 && !location.hash.includes("#/home")){
-            console.log("paso")
-            document.querySelector(".position-header").style["background-color"] = "#800000" 
-        }else{
-            document.querySelector(".position-header").style["background-color"] = "transparent" 
-        }
+ 
 
         if(scrollTop + clientHeight >= scrollHeight ){
             Anime_api.page+=20             
