@@ -22,12 +22,13 @@ let page = Anime_api.page,
     $loader = document.querySelector(".loader")    
     document.querySelector("header").classList.remove("position-header")
     
+    
     $main.innerHTML = null
     if(!hash || hash === "#/home"|| hash === "#/0") {  
         
         console.log("seccion home")
         document.getElementById("back").setAttribute("disabled","")  ;
-
+        document.querySelector("header").style.backgroundColor = "#80000"   
         page=0;
         pagina=0;
         
@@ -35,6 +36,7 @@ let page = Anime_api.page,
 
     }else if(hash.includes("#/search")){
         console.log("seccion buscador") 
+       
         document.querySelector(".btns").style.display = "flex"
         page=0;
         pagina=0;
