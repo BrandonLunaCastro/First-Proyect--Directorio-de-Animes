@@ -28,7 +28,7 @@ let page = Anime_api.page,
         
         console.log("seccion home")
         document.getElementById("back").setAttribute("disabled","")  ;
-        document.querySelector("header").style.backgroundColor = "#80000"   
+      
         page=0;
         pagina=0;
         
