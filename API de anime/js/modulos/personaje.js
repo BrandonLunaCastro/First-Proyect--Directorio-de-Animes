@@ -18,6 +18,6 @@ export function personaje(props){
     $fragment.appendChild($figure)
 
     let clone = document.importNode($fragment,true)
-    console.log(clone)
+    
     return clone;
 }
